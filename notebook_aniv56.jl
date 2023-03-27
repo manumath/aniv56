@@ -420,6 +420,9 @@ md"""
 ## Submatrices Principales 
 """
 
+# ╔═╡ 45523ccb-0571-4c33-961d-f4517961c065
+
+
 # ╔═╡ a58574cf-fddd-485f-b22d-e38afece289a
 md"""
 ## Problemas
@@ -491,7 +494,7 @@ $$\mathcal{J}_n=
 
 \begin{pmatrix}
 
-A_{1} & b_{1} & & & c_{n} \\
+a_{1} & b_{1} & & & c_{n} \\
 
 c_{1} & a_{2} & b_{2} & & \\
 
@@ -505,14 +508,14 @@ b_{n} & & & c_{n-1} & a_{n}
 
 \end{pmatrix}$$
 
-Donde $a_j, b_j, c_j\in\mathbb{R}$ y $b_jc_j>0,\,J=1,2,\ldots,n.$ 
+donde $a_j, b_j, c_j\in\mathbb{R}$ y $b_jc_j>0,\,J=1,2,\ldots,n.$ 
 """)
 
 # ╔═╡ b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 TwoColumn(md"""
-Dada una matriz simétrica $n\times n$ $A_n$, para $j=1,2,\ldots,n$, $A_j$ denota la submatriz principal principal de $A_n$, 
+Dad una matriz periódica de Jacobi ``n\times n,`` $J_j$ denota la submatriz principal principal de $J_n$, 
 
-$$A_j=
+$$J_j=
 \begin{pmatrix}
 a_{1} & b_{1} &  &   &   \\
 b_{1} & a_{2} & b_{2} &  &  \\
@@ -522,14 +525,14 @@ b_{1} & a_{2} & b_{2} &  &  \\
  &  &  & b_{j-1} & a_{j}
 \end{pmatrix},$$ 
 
-- ``\sigma(A_j)=\left\{\lambda_{1}^{(j)},\lambda_{2}^{(j)},\ldots,\lambda_{j}^{(j)} \right\}$ es el espectro de $A_j`` y 
+- ``\sigma(A_j)=\left\{\lambda_{1}^{(j)},\lambda_{2}^{(j)},\ldots,\lambda_{j}^{(j)} \right\}$ es el espectro de $A_j`` 
 - ``P_j(\lambda)`` es el polinomio característico de $A_j$
 - ``\lambda_{1}^{(j)}`` y $\lambda_{j}^{(j)}$ es el valor propio más pequeño y más grande de $A_j$
 
-- ``I_j`` la matriz identidad de $j\times j.$
+- ``I_j`` la matriz identidad de $j\times j$
 """,
 	md"""
-Además, consideramos la matriz
+Consideramos también, para $j=2,\ldots,n-1,$ la matriz
 
 $$
 \tilde{J}_{j}=\begin{pmatrix}
@@ -538,13 +541,11 @@ $$
       & b_{3} & a_{4} & \ddots &  \\
       &  & \ddots & \ddots & b_{j-1} \\
      &  &  & b_{j-1} & a_{j}
-\end{pmatrix},\, j=2,\ldots,n-1,$$
+\end{pmatrix},$$
 
 Que se obtiene eliminando la primera fila y columna de la matriz $J_j,$ cuyo polinomio característico es 
 	
-$$Q_{j}(\lambda)=\det(\lambda I_{j-1}-\tilde{J}_{j}),$$ 
-	
-para $j=2,\ldots,n-1$
+$$Q_{j}(\lambda)=\det(\lambda I_{j-1}-\tilde{J}_{j})$$ 
 """)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -2245,10 +2246,10 @@ version = "1.4.1+0"
 # ╟─3ee15f64-66fe-4570-8e14-40cd93f7d384
 # ╟─a9fdfaa5-d9e3-43f0-8eb1-e0a20f4b0b0f
 # ╟─58ee5733-e606-4a7c-9c70-4279529ff6f8
-# ╠═821993f1-41cc-43f2-81d0-11cec529fc59
+# ╟─821993f1-41cc-43f2-81d0-11cec529fc59
 # ╟─8506a440-0e9c-4927-9258-8e33f8d43658
 # ╟─2e47bf97-fd05-4973-8ccc-16c97f307b01
-# ╠═be92e2d6-a6e2-42a9-a306-610177dd3d04
+# ╟─be92e2d6-a6e2-42a9-a306-610177dd3d04
 # ╟─1912670e-7afc-4c52-a5d2-4266ee6ad32f
 # ╟─0804509e-a23d-411a-ac6a-6ba9c386fdfc
 # ╟─f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
@@ -2280,6 +2281,7 @@ version = "1.4.1+0"
 # ╟─9283bbb4-82c3-425d-acdf-d220f5f1a136
 # ╟─e6348de0-fd5a-48cc-9bce-8b7a334eba52
 # ╟─f1bef616-9b29-4c89-890a-22d890120fb4
+# ╟─45523ccb-0571-4c33-961d-f4517961c065
 # ╟─b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
 # ╟─b986679b-b27f-4658-b750-cbdf31bb7791
