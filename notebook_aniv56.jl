@@ -33,6 +33,9 @@ html"<button onclick='present()' style='background-color: #4CAF50;
     cursor: pointer;'>Iniciar Presentación</button>
 "
 
+# ╔═╡ 82387b99-2558-4dc7-b6a2-064a0f74b3f0
+theme(:dark)
+
 # ╔═╡ f042b24f-b3cc-4f4f-9c5b-f5675250e663
 TableOfContents()
 
@@ -145,7 +148,7 @@ begin
 	eigA=ComplexF64.(eigen(AA).values);
 	reigA = [Real(eigA[i]) for i in 1:length(eigA) if is_real(eigA[i])==true];
 	reigApoints = [(Real(eigA[i]),0) for i in 1:length(eigA) if is_real(eigA[i])==true];
-	plot(scatter(eigA,label=false),begin plot((minimum(reigA)-1):0.1:(maximum(reigA)+1),x->det(x* diagm(0=>ones(3))-AA),lw=3,label=" Polinomio característico"); scatter!(reigApoints,color="red",label=" Autovalores reales") end)
+	plot(scatter(eigA,label=false),begin plot((minimum(reigA)-1):0.1:(maximum(reigA)+1),x->det(x* diagm(0=>ones(3))-AA),lw=3,label=" Polinomio característico",color="orange"); scatter!(reigApoints,color="red",label=" Autovalores reales") end)
 end
 
 # ╔═╡ 821993f1-41cc-43f2-81d0-11cec529fc59
@@ -2227,6 +2230,7 @@ version = "1.4.1+0"
 
 # ╔═╡ Cell order:
 # ╟─44b355a7-e4f0-4507-93b3-5cf5ef88996b
+# ╠═82387b99-2558-4dc7-b6a2-064a0f74b3f0
 # ╟─f042b24f-b3cc-4f4f-9c5b-f5675250e663
 # ╟─36aa8b1a-eb08-4b51-90a6-90d579b7bfad
 # ╟─12244d34-2085-4b99-a19d-dcda64901d3c
