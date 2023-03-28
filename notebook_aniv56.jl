@@ -33,6 +33,9 @@ html"<button onclick='present()' style='background-color: #4CAF50;
     cursor: pointer;'>Iniciar Presentación</button>
 "
 
+# ╔═╡ 493fcf66-26af-4fca-b613-2591750e5d30
+html"""<div><img src="https://i.imgur.com/w0TKAZn.png" style="width: 100%";></div>"""
+
 # ╔═╡ 82387b99-2558-4dc7-b6a2-064a0f74b3f0
 theme(:dark)
 
@@ -47,6 +50,15 @@ html"""
   }
 </style>
 """
+
+# ╔═╡ 629d548d-619c-4df3-985c-96fe273d907e
+#using QRCode
+
+# ╔═╡ 6a31fe1a-d92d-4477-a622-bcd2855d0b0b
+#qrcode = Qrcode("https://github.com/")
+
+# ╔═╡ 552d8345-a1e8-440d-8343-7e2bcd8fc7e4
+
 
 # ╔═╡ 8006b746-85bb-4c25-ba6e-812b62e35b4a
 # using PlotlyBase
@@ -2230,11 +2242,15 @@ version = "1.4.1+0"
 
 # ╔═╡ Cell order:
 # ╟─44b355a7-e4f0-4507-93b3-5cf5ef88996b
-# ╠═82387b99-2558-4dc7-b6a2-064a0f74b3f0
+# ╟─493fcf66-26af-4fca-b613-2591750e5d30
+# ╟─82387b99-2558-4dc7-b6a2-064a0f74b3f0
 # ╟─f042b24f-b3cc-4f4f-9c5b-f5675250e663
 # ╟─36aa8b1a-eb08-4b51-90a6-90d579b7bfad
 # ╟─12244d34-2085-4b99-a19d-dcda64901d3c
 # ╟─fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
+# ╟─629d548d-619c-4df3-985c-96fe273d907e
+# ╟─6a31fe1a-d92d-4477-a622-bcd2855d0b0b
+# ╠═552d8345-a1e8-440d-8343-7e2bcd8fc7e4
 # ╟─8006b746-85bb-4c25-ba6e-812b62e35b4a
 # ╟─d9dce1b0-b534-4740-ae36-20be872c8ca0
 # ╟─20d889df-2165-48df-8a74-4a511c9206e2
