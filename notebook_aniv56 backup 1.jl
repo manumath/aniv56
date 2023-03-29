@@ -119,7 +119,7 @@ html"""<div><img src="https://i.imgur.com/w0TKAZn.png" style="width: 100%";></di
 theme(:default)
 
 # ╔═╡ f042b24f-b3cc-4f4f-9c5b-f5675250e663
-PlutoUI.TableOfContents(aside=true)
+TableOfContents()
 
 # ╔═╡ 36aa8b1a-eb08-4b51-90a6-90d579b7bfad
 html"""
@@ -2287,6 +2287,7 @@ version = "1.4.1+0"
 # ╟─3e242dd6-2dd5-4931-b3fa-a897fd3c0878
 # ╟─588a23a5-1d2c-4a32-b3d8-779f89793a5a
 # ╟─13b2fc98-2173-4638-9ada-0aeef70d795d
+# ╠═9fb9add2-d1b6-49d1-ab71-3923c9c104dc
 # ╟─eed3568d-e647-485f-ab68-9619c408e961
 # ╟─6f4f7f73-abea-4507-bdd6-16c37ad1e818
 # ╟─3ee15f64-66fe-4570-8e14-40cd93f7d384
