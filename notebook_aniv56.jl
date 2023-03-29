@@ -217,6 +217,39 @@ md"""
 ## Ejemplo
 """
 
+# ╔═╡ 641d76ce-0bc4-4561-bbd8-20c81cb5bca5
+let
+
+range = -10:1:10
+md"""
+	
+Esta es una matriz "escuudible": ¡haga clic en el número y arrastre para cambiar!
+	
+**``A =``**  
+	
+``(``	
+ $(@bind a1 Scrubbable( range; default=1.0))
+ $(@bind b1 Scrubbable( range; default=0.0))
+ $(@bind c1 Scrubbable( range; default=0.0))
+``)``
+
+``(``
+$(@bind d1 Scrubbable(range; default=0.0 ))
+$(@bind e1 Scrubbable(range; default=1.0)) 
+$(@bind f1 Scrubbable(range; default=0.0))
+``)``  
+
+``(``
+$(@bind g1 Scrubbable(range; default=0.0 ))
+$(@bind h1 Scrubbable(range; default=0.0)) 
+$(@bind i1 Scrubbable(range; default=1.0))
+``)`` 
+	
+
+	
+"""
+end
+
 # ╔═╡ eed3568d-e647-485f-ab68-9619c408e961
 AA=[a1 b1 c1; d1 e1 f1;g1 h1 i1];
 
@@ -678,57 +711,6 @@ md"""
 md"""
 # Matrices periódicas de Jacobi a partir de datos espectrales especiales
 """
-
-# ╔═╡ 641d76ce-0bc4-4561-bbd8-20c81cb5bca5
-let
-
-range = -10:1:10
-md"""
-	
-Esta es una matriz "escuudible": ¡haga clic en el número y arrastre para cambiar!
-	
-**``A =``**  
-	
-``(``	
- $(@bind a1 Scrubbable( range; default=1.0))
- $(@bind b1 Scrubbable( range; default=0.0))
- $(@bind c1 Scrubbable( range; default=0.0))
-``)``
-
-``(``
-$(@bind d1 Scrubbable(range; default=0.0 ))
-$(@bind e1 Scrubbable(range; default=1.0)) 
-$(@bind f1 Scrubbable(range; default=0.0))
-``)``  
-
-``(``
-$(@bind g1 Scrubbable(range; default=0.0 ))
-$(@bind h1 Scrubbable(range; default=0.0)) 
-$(@bind i1 Scrubbable(range; default=1.0))
-``)`` 
-	
-
-	
-"""
-end
-
-# ╔═╡ 9fb9add2-d1b6-49d1-ab71-3923c9c104dc
-# ╠═╡ disabled = true
-#=╠═╡
-begin
-	lower = -10;
-	upper = 10;
-	aslider = @bind a1 Slider(lower:upper, default=1)
-	bslider = @bind b1 Slider(lower:upper, default=2)
-	cslider = @bind c1 Slider(lower:upper, default=3)
-	dslider = @bind d1 Slider(lower:upper, default=0)
-	eslider = @bind e1 Slider(lower:upper, default=0)
-	fslider = @bind f1 Slider(lower:upper, default=0)
-	gslider = @bind g1 Slider(lower:upper, default=3)
-	hslider = @bind h1 Slider(lower:upper, default=8)
-	islider = @bind i1 Slider(lower:upper, default=12)
-end;
-  ╠═╡ =#
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
