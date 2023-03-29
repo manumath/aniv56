@@ -60,7 +60,7 @@ font-size: 1.5rem;
 opacity: .8;
 "><em>Section 1.5</em></p>
 <p style="text-align: center; font-size: 2rem;">
-<em> Transformations II: Composability, Linearity and Nonlinearity </em>
+<em>Transformaciones II: Composibilidad, linealidad y no linealidad </em>
 </p>
 
 <p style="
@@ -70,7 +70,7 @@ opacity: .8;
 "><em>Lecture Video</em></p>
 <div style="display: flex; justify-content: center;">
 <div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
-<iframe src="https://www.youtube.com/embed/VDPf3RjoCpY" width=400 height=250  frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+</div>
 </div>
 </div>
 
@@ -85,13 +85,10 @@ PlutoUI.TableOfContents(aside=true)
 
 # ╔═╡ 230b0118-30b7-4035-ad31-520165a76fcc
 md"""
-#### Intializing packages
+#### Iniciando los paquetes
 
-_When running this notebook for the first time, this could take up to 15 minutes. Hang in there!_
+_Al ejecutar este portátil por primera vez, esto podría tardar hasta 15 minutos. ¡Agárrate!_
 """
-
-# ╔═╡ 230cba36-9d0a-4726-9e55-7df2c6743968
-
 
 # ╔═╡ 890d30b9-2cd0-4d3a-99f6-f7d3d7858fda
 corgis_url = "https://user-images.githubusercontent.com/6933510/108605549-fb28e180-73b4-11eb-8520-7e29db0cc965.png"
@@ -109,14 +106,14 @@ theteam_url = "https://news.mit.edu/sites/default/files/styles/news_article__ima
 
 # ╔═╡ 26dd0e98-7a75-11eb-2196-5d7bda201b19
 md"""
-After you select your image, we suggest moving this line above just above the top of your browser.
+Después de seleccionar su imagen, le sugerimos que mueva esta línea justo por encima de la parte superior de su navegador.
 
 ---------------
 """
 
 # ╔═╡ e0b657ce-7a03-11eb-1f9d-f32168cb5394
 md"""
-#  The fun stuff: playing with transforms
+#  Las cosas divertidas: jugar con transformaciones
 """
 
 # ╔═╡ 005ca75a-7622-11eb-2ba4-9f450e71df1f
@@ -125,7 +122,7 @@ let
 range = -1.5:.1:1.5
 md"""
 	
-This is a "scrubbable" matrix: click on the number and drag to change!
+Esta es una matriz "escuudible": ¡haga clic en el número y arrastre para cambiar!
 	
 **A =**  
 	
@@ -146,7 +143,7 @@ end
 
 # ╔═╡ 23ade8ee-7a09-11eb-0e40-296c6b831d74
 md"""
-Grab a [linear](#a0afe3ae-76b9-11eb-2301-cde7260ddd7f) or [nonlinear](#a290d5e2-7a02-11eb-37db-41bf86b1f3b3) transform, or make up your own!
+Elige una transformación [lineal](#a0afe3ae-76b9-11eb-2301-cde7260ddd7f) o [no lineal](#a290d5e2-7a02-11eb-37db-41bf86b1f3b3), ¡o haz la tuya propia!
 """
 
 # ╔═╡ 2efaa336-7630-11eb-0c17-a7d4a0141dac
@@ -167,9 +164,6 @@ md"""
 h= $(@bind h Slider(.1:.1:10, show_value=true, default = 5))
 """
 
-# ╔═╡ b76a5bd6-802f-11eb-0951-1f1092dee8de
-1+1
-
 # ╔═╡ 5d33f6ea-7e9c-11eb-2fb3-dbb7cb07c60c
 md"""
 pixels = $(@bind pixels Slider(1:1000, default=800, show_value=true))
@@ -177,19 +171,19 @@ pixels = $(@bind pixels Slider(1:1000, default=800, show_value=true))
 
 # ╔═╡ 45dccdec-7912-11eb-01b4-a97e30344f39
 md"""
-Show grid lines $(@bind show_grid CheckBox(default=true))
+Mostrar grillado $(@bind show_grid CheckBox(default=true))
 ngrid = $(@bind ngrid Slider(5:5:20, show_value=true, default = 10))
 """
 
 # ╔═╡ d2fb356e-7f32-11eb-177d-4f47d6c9e59b
 md"""
-Circular Frame $(@bind circular CheckBox(default=true))
+Marco circular $(@bind circular CheckBox(default=true))
 radius = $(@bind r Slider(.1:.1:1, show_value=true, default = 1))
 """
 
 # ╔═╡ 55b5fc92-7a76-11eb-3fba-854c65eb87f9
 md"""
-Above: The original image is placed in a [-1,1] x [-1 1] box and transformed.
+Encima: La imágen original está en un box de [-1,1] x [-1 1] y es transformada.
 """
 
 # ╔═╡ 85686412-7a75-11eb-3d83-9f2f8a3c5509
@@ -277,7 +271,7 @@ Here are a few useful linear transformations:
 """
 
 # ╔═╡ d364f91a-76b9-11eb-1807-75e733940d53
-begin
+3RTbegin
 	 id((x, y)) = SA[x, y]
 	
 	 scalex(α) = ((x, y),) -> SA[α*x,  y]
@@ -1814,31 +1808,29 @@ version = "17.4.0+0"
 """
 
 # ╔═╡ Cell order:
-# ╠═972b2230-7634-11eb-028d-df7fc722ec70
+# ╟─972b2230-7634-11eb-028d-df7fc722ec70
 # ╟─b7895bd2-7634-11eb-211e-ef876d23bd88
 # ╟─230b0118-30b7-4035-ad31-520165a76fcc
-# ╠═6b473b2d-4326-46b4-af38-07b61de287fc
-# ╟─230cba36-9d0a-4726-9e55-7df2c6743968
-# ╠═96766502-7a06-11eb-00cc-29849773dbcf
-# ╠═890d30b9-2cd0-4d3a-99f6-f7d3d7858fda
-# ╠═85fba8fb-a9ea-444d-831b-ec6489b58b4f
-# ╠═06beabc3-2aa7-4e78-9bae-dc4b37251aa2
-# ╠═26dd0e98-7a75-11eb-2196-5d7bda201b19
+# ╟─6b473b2d-4326-46b4-af38-07b61de287fc
+# ╟─96766502-7a06-11eb-00cc-29849773dbcf
+# ╟─890d30b9-2cd0-4d3a-99f6-f7d3d7858fda
+# ╟─85fba8fb-a9ea-444d-831b-ec6489b58b4f
+# ╟─06beabc3-2aa7-4e78-9bae-dc4b37251aa2
+# ╟─26dd0e98-7a75-11eb-2196-5d7bda201b19
 # ╟─e0b657ce-7a03-11eb-1f9d-f32168cb5394
 # ╠═005ca75a-7622-11eb-2ba4-9f450e71df1f
-# ╠═ca28189e-7e9a-11eb-21d6-bd819f3e0d3a
+# ╟─ca28189e-7e9a-11eb-21d6-bd819f3e0d3a
 # ╟─23ade8ee-7a09-11eb-0e40-296c6b831d74
-# ╠═58a30e54-7a08-11eb-1c57-dfef0000255f
-# ╠═2efaa336-7630-11eb-0c17-a7d4a0141dac
-# ╠═7f28ac40-7914-11eb-1403-b7bec34aeb94
-# ╠═ce55beee-7643-11eb-04bc-b517703facff
-# ╠═b76a5bd6-802f-11eb-0951-1f1092dee8de
-# ╠═5d33f6ea-7e9c-11eb-2fb3-dbb7cb07c60c
-# ╠═45dccdec-7912-11eb-01b4-a97e30344f39
-# ╠═d2fb356e-7f32-11eb-177d-4f47d6c9e59b
-# ╠═ccea7244-7f2f-11eb-1b7b-b9b8473a8c74
-# ╠═55b5fc92-7a76-11eb-3fba-854c65eb87f9
-# ╠═85686412-7a75-11eb-3d83-9f2f8a3c5509
+# ╟─58a30e54-7a08-11eb-1c57-dfef0000255f
+# ╟─2efaa336-7630-11eb-0c17-a7d4a0141dac
+# ╟─7f28ac40-7914-11eb-1403-b7bec34aeb94
+# ╟─ce55beee-7643-11eb-04bc-b517703facff
+# ╟─5d33f6ea-7e9c-11eb-2fb3-dbb7cb07c60c
+# ╟─45dccdec-7912-11eb-01b4-a97e30344f39
+# ╟─d2fb356e-7f32-11eb-177d-4f47d6c9e59b
+# ╟─ccea7244-7f2f-11eb-1b7b-b9b8473a8c74
+# ╟─55b5fc92-7a76-11eb-3fba-854c65eb87f9
+# ╟─85686412-7a75-11eb-3d83-9f2f8a3c5509
 # ╟─a7df7346-79f8-11eb-1de6-71f027c46643
 # ╟─044e6128-79fe-11eb-18c1-395ae857dc73
 # ╟─78d61e28-79f9-11eb-0605-e77d206cda84

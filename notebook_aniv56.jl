@@ -57,6 +57,9 @@ font-feature-settings: 'lnum', 'pnum';
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;'>Iniciar Presentación</button>
+<br>
+<br>
+<br>
 <p style="
 font-size: 1.5rem;
 opacity: .8;
@@ -206,24 +209,6 @@ html"""
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Gx0PaWI9eYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 """
 
-# ╔═╡ 9fb9add2-d1b6-49d1-ab71-3923c9c104dc
-begin
-	lower = -10;
-	upper = 10;
-	aslider = @bind a1 Slider(lower:upper, default=1)
-	bslider = @bind b1 Slider(lower:upper, default=2)
-	cslider = @bind c1 Slider(lower:upper, default=3)
-	dslider = @bind d1 Slider(lower:upper, default=0)
-	eslider = @bind e1 Slider(lower:upper, default=0)
-	fslider = @bind f1 Slider(lower:upper, default=0)
-	gslider = @bind g1 Slider(lower:upper, default=3)
-	hslider = @bind h1 Slider(lower:upper, default=8)
-	islider = @bind i1 Slider(lower:upper, default=12)
-end;
-
-# ╔═╡ eed3568d-e647-485f-ab68-9619c408e961
-AA=[a1 b1 c1; d1 e1 f1;g1 h1 i1];
-
 # ╔═╡ 6f4f7f73-abea-4507-bdd6-16c37ad1e818
 AbstractAlgebra.charpoly(A::Matrix) = charpoly(QQ["x"][1], matrix(QQ,A))
 
@@ -232,14 +217,11 @@ md"""
 ## Ejemplo
 """
 
+# ╔═╡ eed3568d-e647-485f-ab68-9619c408e961
+AA=[a1 b1 c1; d1 e1 f1;g1 h1 i1];
+
 # ╔═╡ a9fdfaa5-d9e3-43f0-8eb1-e0a20f4b0b0f
-latexify(AA),md"""
-	
-``a`` $(aslider)  ``b`` $(bslider) ``c`` $(cslider)
-	
-``d`` $(dslider) ``e`` $(eslider) ``f`` $(fslider)
-	
-``g`` $(gslider) ``h`` $(hslider) ``i`` $(islider)""",latexify(repr(charpoly(AA)))
+latexify(repr(charpoly(AA)))
 
 # ╔═╡ 58ee5733-e606-4a7c-9c70-4279529ff6f8
 begin	
@@ -249,24 +231,40 @@ begin
 	plot(scatter(eigA,label=false),begin plot((minimum(reigA)-1):0.1:(maximum(reigA)+1),x->det(x* diagm(0=>ones(3))-AA),lw=3,label=" Polinomio característico"); scatter!(reigApoints,label=" Autovalores reales") end)
 end
 
-# ╔═╡ 821993f1-41cc-43f2-81d0-11cec529fc59
-sliderm=md"``m=``$(@bind m Slider(1:20,show_value=true,default=4))";
-
-# ╔═╡ 8506a440-0e9c-4927-9258-8e33f8d43658
-begin
-	R=rand(-10:10,m,m);
-	S=R+R';
-	eigR=ComplexF64.(eigen(R).values);
-	eigS=ComplexF64.(eigen(S).values);
-end;
-
 # ╔═╡ 2e47bf97-fd05-4973-8ccc-16c97f307b01
 md"""
 ## Ejemplo (matriz aleatoria)
 """
 
+# ╔═╡ 1231cb19-33e8-4833-a510-3be047331618
+md"""
+Consideremos una matriz de tamaño $(@bind m Scrubbable(1:10; default=5))
+"""
+
+# ╔═╡ 0804509e-a23d-411a-ac6a-6ba9c386fdfc
+md"""
+## Ejemplo (matriz aleatoria simétrica)
+"""
+
+# ╔═╡ f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
+md"""
+Consideremos una matriz simétrica de tamaño $(@bind m1 Scrubbable(1:10; default=5))
+"""
+
+# ╔═╡ 8506a440-0e9c-4927-9258-8e33f8d43658
+begin
+	R=rand(-10:10,m,m);
+	auxmat=rand(-10:10,m1,m1)
+	S=auxmat+auxmat'
+	eigR=ComplexF64.(eigen(R).values);
+	eigS=ComplexF64.(eigen(S).values);
+end;
+
 # ╔═╡ be92e2d6-a6e2-42a9-a306-610177dd3d04
-latexify(R),sliderm,latexify(repr(charpoly(R)))
+latexify(R)
+
+# ╔═╡ d331554d-36af-4b32-bec5-52325d1e1107
+latexify(repr(charpoly(R)))
 
 # ╔═╡ 1912670e-7afc-4c52-a5d2-4266ee6ad32f
 begin
@@ -275,19 +273,17 @@ begin
 	plot(scatter(eigR,label=false),begin plot(minimum(reigR)-1:0.1:maximum(reigR)+1,x->det(x* diagm(0=>ones(m))-R),lw=3,label=" Polinomio característico"); scatter!(reigRpoints,label=" Autovalores reales") end)
 end
 
-# ╔═╡ 0804509e-a23d-411a-ac6a-6ba9c386fdfc
-md"""
-## Ejemplo (matriz aleatoria simétrica)
-"""
+# ╔═╡ 4d109fcc-1294-4015-b6d1-063164ee492b
+latexify(S)
 
-# ╔═╡ f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
-latexify(S),sliderm,latexify(repr(charpoly(S)))
+# ╔═╡ 9dcd54bd-beda-479b-893c-74fbaeeb20bb
+latexify(repr(charpoly(R)))
 
 # ╔═╡ 257bada4-8250-4603-97f2-c07c307caf9b
 begin
 	reigS = [Real(eigS[i]) for i in 1:length(eigS) if is_real(eigS[i])==true];
 	reigSpoints = [(Real(eigS[i]),0) for i in 1:length(eigS) if is_real(eigS[i])==true];
-	plot(scatter(eigS,label=false),begin plot(minimum(reigS)-1:0.1:maximum(reigS)+1,x->det(x* diagm(0=>ones(m))-S),lw=3,label=" Polinomio característico"); scatter!(reigSpoints,label=" Autovalores reales") end)
+	plot(scatter(eigS,label=false),begin plot(minimum(reigS)-1:0.1:maximum(reigS)+1,x->det(x* diagm(0=>ones(m1))-S),lw=3,label=" Polinomio característico"); scatter!(reigSpoints,label=" Autovalores reales") end)
 end
 
 # ╔═╡ b1251b44-297c-497e-8586-1d2b59996454
@@ -342,11 +338,79 @@ begin
 	sliderb=md"``b=``$(@bind b Slider(-2:.25:2,show_value=true))";
 end;
 
+# ╔═╡ e333fd27-1499-4505-8276-12648fb0357c
+md"""
+## Problema de asignación de polos
+"""
+
+# ╔═╡ 12cbbf33-822a-40a4-abb3-248e0031d39c
+TwoColumn(md"""
+- Diseñar un controlador para un sistema dinámico lineal que permita asignar los polos del sistema a ubicaciones deseadas en el plano complejo. 
+- Los polos son las raíces del denominador de la función de transferencia del sistema y representan la dinámica del sistema. 
+- La ubicación de los polos determina la estabilidad, la respuesta transitoria y la capacidad de seguimiento del sistema.
+- Las ubicaciones de los polos están determinadas por los requisitos de rendimiento, como la velocidad de respuesta, la amortiguación y el error estacionario. """,md"""
+- No todas las ubicaciones de polos son alcanzables, por lo que es posible que no sea posible asignar los polos a ubicaciones deseadas. 
+- La asignación de polos puede no ser única, lo que significa que puede haber varios controladores que satisfagan los mismos requisitos de rendimiento.
+- Existen varias técnicas para resolver el problema de asignación de polos, incluyendo el método de colocación de polos, el método de retroalimentación de estados y el método de diseño basado en observador.""")
+
+
+
+# ╔═╡ 72da8f1b-a8ed-4549-84dd-45075b49a559
+md"""
+```math
+\dot{x}(t)=A x(t) +B u(t)
+```
+``x (t) ∈\mathbb{R}^n `` es el *estado* y ``u(t) ∈\mathbb{R}^n,`` un **control**.
+
+"""
+
+# ╔═╡ e4427075-3f3a-4771-b3a0-14c20f7accb2
+md"""
+## El Sistema Lineal
+"""
+
+# ╔═╡ 0f0779e8-4c07-455b-a761-fc41693c25c0
+TwoColumn(md"""
+Consideremos el sistema lineal
+> ``\dot{x}(t)=A x(t)``
+donde ``x (t) ∈\mathbb{R}^n `` es el *estado*.
+
+""",let
+
+range1 = -5:0.25:5
+md"""	
+**``A =``**  
+	
+``(``	
+ $(@bind aa Scrubbable( range1; default=-4))
+ $(@bind bb Scrubbable( range1; default=-1))
+ $(@bind cc Scrubbable( range1; default=0))
+``)``
+
+``(``
+$(@bind dd Scrubbable(range1; default=1 ))
+$(@bind ee Scrubbable(range1; default=-1.5)) 
+$(@bind ff Scrubbable(range1; default=0))
+``)``  
+
+``(``
+$(@bind gg Scrubbable(range1; default=0 ))
+$(@bind hh Scrubbable(range1; default=0)) 
+$(@bind ii Scrubbable(range1; default=-2))
+``)`` 
+
+
+Esta es una matriz "escuudible": ¡haga clic en el número y arrastre para cambiar!	
+
+	
+"""
+end)
+
 # ╔═╡ 5474d87c-3454-4192-8086-6acfd050f760
 begin
-	A=[-.04 -1 0
-		1 a 0
-		0 0 -0.2]; 
+	A=[aa bb cc
+		dd ee ff
+		gg hh ii]; 
 	B=[-0.5 0 0
 		0 0 0
 		0 0 0];
@@ -381,40 +445,6 @@ begin
 	sol3=de_solve(prob3,Tsit5(), reltol=1e-8)
 	x3,y3,z3=sol3[1,:],sol3[2,:],sol3[3,:]
 end;
-
-# ╔═╡ e333fd27-1499-4505-8276-12648fb0357c
-md"""
-## Problema de asignación de polos
-"""
-
-# ╔═╡ 12cbbf33-822a-40a4-abb3-248e0031d39c
-TwoColumn(md"""
-- Diseñar un controlador para un sistema dinámico lineal que permita asignar los polos del sistema a ubicaciones deseadas en el plano complejo. 
-- Los polos son las raíces del denominador de la función de transferencia del sistema y representan la dinámica del sistema. 
-- La ubicación de los polos determina la estabilidad, la respuesta transitoria y la capacidad de seguimiento del sistema.
-- Las ubicaciones de los polos están determinadas por los requisitos de rendimiento, como la velocidad de respuesta, la amortiguación y el error estacionario. """,md"""
-- No todas las ubicaciones de polos son alcanzables, por lo que es posible que no sea posible asignar los polos a ubicaciones deseadas. 
-- La asignación de polos puede no ser única, lo que significa que puede haber varios controladores que satisfagan los mismos requisitos de rendimiento.
-- Existen varias técnicas para resolver el problema de asignación de polos, incluyendo el método de colocación de polos, el método de retroalimentación de estados y el método de diseño basado en observador.""")
-
-
-
-# ╔═╡ 72da8f1b-a8ed-4549-84dd-45075b49a559
-md"""
-```math
-\dot{x}(t)=A x(t) +B u(t)
-```
-``x (t) ∈\mathbb{R}^n `` es el *estado* y ``u(t) ∈\mathbb{R}^n,`` un **control**.
-
-"""
-
-# ╔═╡ e4427075-3f3a-4771-b3a0-14c20f7accb2
-md"""
-## El Sistema Lineal
-"""
-
-# ╔═╡ 27d73660-910e-40d8-a7b4-4a1a03852cf8
-md"$A=$",latexify(A),slidera
 
 # ╔═╡ 3ca3df7f-472b-4485-b470-db206f6bfe36
 begin
@@ -649,196 +679,56 @@ md"""
 # Matrices periódicas de Jacobi a partir de datos espectrales especiales
 """
 
-# ╔═╡ 6ac5456f-1f20-4b33-af1c-3ab43e978426
+# ╔═╡ 641d76ce-0bc4-4561-bbd8-20c81cb5bca5
 let
 
-range = -1.5:.1:1.5
+range = -10:1:10
 md"""
 	
-This is a "scrubbable" matrix: click on the number and drag to change!
+Esta es una matriz "escuudible": ¡haga clic en el número y arrastre para cambiar!
 	
-**A =**  
+**``A =``**  
 	
 ``(``	
- $(@bind aa Scrubbable( range; default=1.0))
- $(@bind bb Scrubbable( range; default=0.0))
+ $(@bind a1 Scrubbable( range; default=1.0))
+ $(@bind b1 Scrubbable( range; default=0.0))
+ $(@bind c1 Scrubbable( range; default=0.0))
 ``)``
 
 ``(``
-$(@bind cc Scrubbable(range; default=0.0 ))
-$(@bind dd Scrubbable(range; default=1.0)) 
+$(@bind d1 Scrubbable(range; default=0.0 ))
+$(@bind e1 Scrubbable(range; default=1.0)) 
+$(@bind f1 Scrubbable(range; default=0.0))
 ``)``  
+
+``(``
+$(@bind g1 Scrubbable(range; default=0.0 ))
+$(@bind h1 Scrubbable(range; default=0.0)) 
+$(@bind i1 Scrubbable(range; default=1.0))
+``)`` 
 	
 
 	
 """
 end
 
-# ╔═╡ d868121d-49a3-4c03-b28f-226ba79961de
-md"""
-zoom = $(@bind  z Scrubbable(.1:.1:3,  default=1))
-"""
-
-# ╔═╡ 33aa41e8-89b0-47f2-9d45-c7973f908d45
-md"""
-pan = [$(@bind panx Scrubbable(-1:.1:1, default=0)), 
-$(@bind pany Scrubbable(-1:.1:1, default=0)) ]
-"""
-
-# ╔═╡ d245f0a1-7a31-4d11-8991-d17bdfad0012
-md"""
-α= $(@bind α Slider(-30:.1:30, show_value=true, default=0))
-β= $(@bind β Slider(-10:.1:10, show_value=true, default = 5))
-h= $(@bind h Slider(.1:.1:10, show_value=true, default = 5))
-"""
-
-# ╔═╡ 0d4a8388-908a-41bb-b7ff-297a12842fe2
-md"""
-pixels = $(@bind pixels Slider(1:1000, default=800, show_value=true))
-"""
-
-# ╔═╡ 76563a49-cd30-4a35-8069-0647b72749e5
-md"""
-Circular Frame $(@bind circular CheckBox(default=true))
-radius = $(@bind r Slider(.1:.1:1, show_value=true, default = 1))
-"""
-
-# ╔═╡ cb987dad-ae48-4822-b5d0-6da6b8e5c46f
-md"""
-Above: The original image is placed in a [-1,1] x [-1 1] box and transformed.
-"""
-
-# ╔═╡ 817bf491-d72c-4da0-be02-999b7b07a78d
-AAA = [aa bb ; cc dd];
-
-# ╔═╡ 876f2d5b-2097-4aa0-8fc8-b1065f0804e4
-longcorgi_url = "https://user-images.githubusercontent.com/6933510/110868198-713faa80-82c8-11eb-8264-d69df4509f49.png"
-
-# ╔═╡ dfbcdd5f-4c3b-4bd1-af2e-18851510d36b
-img_original = load(download(longcorgi_url));
-
-# ╔═╡ c0a1ebb5-fc55-443e-90da-50d472a9e5f8
+# ╔═╡ 9fb9add2-d1b6-49d1-ab71-3923c9c104dc
+# ╠═╡ disabled = true
+#=╠═╡
 begin
-	lin(a, b, c, d) = ((x, y),) -> (a*x + b*y, c*x + d*y)
-	
-	lin(A) = v-> A * [v...]  # linear algebra version using matrix multiplication
-end
-
-# ╔═╡ 0f223209-4be5-4961-ab0e-f0e841be5933
-# T⁻¹ = id
-#  T⁻¹ = rotate(α)
- # T⁻¹ = shear(α)
-  T⁻¹ = lin(A) # uses the scrubbable 
-#   T⁻¹ = shear(α) ∘ shear(-α)
- # T⁻¹ = nonlin_shear(α)  
- #   T⁻¹ =   inverse(nonlin_shear(α))
-#    T⁻¹ =  nonlin_shear(-α)
-#  T⁻¹ =  xy 
-# T⁻¹ = warp(α)
-# T⁻¹ = ((x,y),)-> (x+α*y^2,y+α*x^2) # may be non-invertible
-
-# T⁻¹ = ((x,y),)-> (x,y^2)  
-# T⁻¹  = flipy ∘ ((x,y),) ->  ( (β*x - α*y)/(β - y)  , -h*y/ (β - y)   ) 
-
-# ╔═╡ afde2b0f-014a-4ec5-b6a5-838a8439649e
-begin
-	 id((x, y)) = SA[x, y]
-	
-	 scalex(α) = ((x, y),) -> SA[α*x,  y]
-	 scaley(α) = ((x, y),) -> SA[x,   α*y]
-	 scale(α)  = ((x, y),) -> SA[α*x, α*y]
-	
-	 swap((x, y))  = SA[y, x]
-	 flipy((x, y)) = SA[x, -y]
-	
-	 rotate(θ) = ((x, y),) -> SA[cos(θ)*x + sin(θ)*y, -sin(θ)*x + cos(θ)*y]
-	 shear(α)  = ((x, y),) -> SA[x + α*y, y]
-end
-
-# ╔═╡ 6d003464-48b9-49ed-8391-ca6dd97b49bd
-begin
-  translate(α,β)  = ((x, y),) -> SA[x+α, y+β]   # affine, but not linear
-	
-  nonlin_shear(α) = ((x, y),) -> SA[x, y + α*x^2]
-	
-  warp(α)    = ((x, y),) -> rotate(α*√(x^2+y^2))(SA[x, y])
-  xy((r, θ)) = SA[ r*cos(θ), r*sin(θ) ]
-  rθ(x)      = SA[norm(x), atan(x[2],x[1]) ] 
-  
-  # exponentialish =  ((x,y),) -> [log(x+1.2), log(y+1.2)]
-  # merc = ((x,y),) ->  [ log(x^2+y^2)/2 , atan(y,x) ] # (reim(log(complex(y,x)) ))
-end
-
-# ╔═╡ e7577869-c506-422a-9615-bfbe9b404a21
-begin
-	function transform_xy_to_ij(img::AbstractMatrix, x::Float64, y::Float64)
-	# convert coordinate system xy to ij 
-	# center image, and use "white" when out of the boundary
-		
-		rows, cols = size(img)
-		m = max(cols, rows)	
-		
-	    # function to take xy to ij
-		xy_to_ij =  translate(rows/2, cols/2) ∘ swap ∘ flipy ∘ scale(m/2)
-		
-		# apply the function and "snap to grid"
-		i, j = floor.(Int, xy_to_ij((x, y))) 
-	
-	end
-	
-	function getpixel(img,i::Int,j::Int; circular::Bool=false, r::Real=200)   
-		#  grab image color or place default
-		rows, cols = size(img)
-		m = max(cols,rows)
-		if circular
-			c = (i-rows/2)^2 + (j-cols/2)^2 ≤ r*m^2/4
-		else
-			c = true
-		end
-		
-		if 1 < i ≤ rows && 1 < j ≤ cols && c
-			img[i, j]
-		else
-			# white(img[1, 1])
-			black(img[1,1])
-		end
-		
-	end
-	
-	
-	# function getpixel(img,x::Float64,y::Float64)
-	# 	i,j = transform_xy_to_ij(img,x,y)
-	# 	getpixel(img,i,j)
-	# end
-	
-	function transform_ij_to_xy(i::Int,j::Int,pixels)
-	
-	   ij_to_xy =  scale(2/pixels) ∘ flipy ∘ swap ∘ translate(-pixels/2,-pixels/2)
-	   ij_to_xy([i,j])
-	end
-
-	    
-end
-
-# ╔═╡ 95c33961-3fb9-4a3c-b934-b6750003a134
-begin
-		[			    
-			begin
-			
-			 x, y = transform_ij_to_xy(i,j, pixels)
-			
-			X, Y = ( translate(-panx,-pany)  )([x,y])
-			 X, Y = ( T⁻¹∘scale(1/z)∘translate(-panx,-pany) )([x,y])
-			 i, j = transform_xy_to_ij(img,X,Y)
-			 getpixel(img,i,j; circular=circular, r=r)
-			end	 
-		
-			for i = 1:pixels, j = 1:pixels
-		]	
-end
-
-# ╔═╡ 3c511955-b784-41ac-adc5-ea094eeaab72
-transform_xy_to_ij(img,0.0,0.0)
+	lower = -10;
+	upper = 10;
+	aslider = @bind a1 Slider(lower:upper, default=1)
+	bslider = @bind b1 Slider(lower:upper, default=2)
+	cslider = @bind c1 Slider(lower:upper, default=3)
+	dslider = @bind d1 Slider(lower:upper, default=0)
+	eslider = @bind e1 Slider(lower:upper, default=0)
+	fslider = @bind f1 Slider(lower:upper, default=0)
+	gslider = @bind g1 Slider(lower:upper, default=3)
+	hslider = @bind h1 Slider(lower:upper, default=8)
+	islider = @bind i1 Slider(lower:upper, default=12)
+end;
+  ╠═╡ =#
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2397,51 +2287,55 @@ version = "1.4.1+0"
 # ╟─3feaf757-ff48-44a2-a215-575fe612674d
 # ╟─74595914-a089-4984-961f-a9d19614675d
 # ╟─493fcf66-26af-4fca-b613-2591750e5d30
-# ╟─82387b99-2558-4dc7-b6a2-064a0f74b3f0
-# ╟─f042b24f-b3cc-4f4f-9c5b-f5675250e663
-# ╟─36aa8b1a-eb08-4b51-90a6-90d579b7bfad
-# ╟─12244d34-2085-4b99-a19d-dcda64901d3c
-# ╟─fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
-# ╟─629d548d-619c-4df3-985c-96fe273d907e
-# ╟─6a31fe1a-d92d-4477-a622-bcd2855d0b0b
-# ╟─8006b746-85bb-4c25-ba6e-812b62e35b4a
-# ╟─d9dce1b0-b534-4740-ae36-20be872c8ca0
-# ╟─20d889df-2165-48df-8a74-4a511c9206e2
-# ╟─250bbc56-c12c-4994-a89a-04ed3f1964d2
-# ╟─0672057b-e46b-46e9-a910-6847b94e5732
+# ╠═82387b99-2558-4dc7-b6a2-064a0f74b3f0
+# ╠═f042b24f-b3cc-4f4f-9c5b-f5675250e663
+# ╠═36aa8b1a-eb08-4b51-90a6-90d579b7bfad
+# ╠═12244d34-2085-4b99-a19d-dcda64901d3c
+# ╠═fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
+# ╠═629d548d-619c-4df3-985c-96fe273d907e
+# ╠═6a31fe1a-d92d-4477-a622-bcd2855d0b0b
+# ╠═8006b746-85bb-4c25-ba6e-812b62e35b4a
+# ╠═d9dce1b0-b534-4740-ae36-20be872c8ca0
+# ╠═20d889df-2165-48df-8a74-4a511c9206e2
+# ╠═250bbc56-c12c-4994-a89a-04ed3f1964d2
+# ╠═0672057b-e46b-46e9-a910-6847b94e5732
 # ╟─19aa0519-e543-4899-9ccc-0c0469ace8be
 # ╟─19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
 # ╟─34b145ef-248a-4746-8082-ac0623440c32
 # ╟─3e242dd6-2dd5-4931-b3fa-a897fd3c0878
 # ╟─588a23a5-1d2c-4a32-b3d8-779f89793a5a
 # ╟─13b2fc98-2173-4638-9ada-0aeef70d795d
-# ╟─9fb9add2-d1b6-49d1-ab71-3923c9c104dc
+# ╠═9fb9add2-d1b6-49d1-ab71-3923c9c104dc
 # ╟─eed3568d-e647-485f-ab68-9619c408e961
 # ╟─6f4f7f73-abea-4507-bdd6-16c37ad1e818
 # ╟─3ee15f64-66fe-4570-8e14-40cd93f7d384
+# ╠═641d76ce-0bc4-4561-bbd8-20c81cb5bca5
 # ╟─a9fdfaa5-d9e3-43f0-8eb1-e0a20f4b0b0f
 # ╟─58ee5733-e606-4a7c-9c70-4279529ff6f8
-# ╟─821993f1-41cc-43f2-81d0-11cec529fc59
 # ╟─8506a440-0e9c-4927-9258-8e33f8d43658
 # ╟─2e47bf97-fd05-4973-8ccc-16c97f307b01
+# ╟─1231cb19-33e8-4833-a510-3be047331618
 # ╟─be92e2d6-a6e2-42a9-a306-610177dd3d04
+# ╟─d331554d-36af-4b32-bec5-52325d1e1107
 # ╟─1912670e-7afc-4c52-a5d2-4266ee6ad32f
 # ╟─0804509e-a23d-411a-ac6a-6ba9c386fdfc
 # ╟─f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
+# ╟─4d109fcc-1294-4015-b6d1-063164ee492b
+# ╟─9dcd54bd-beda-479b-893c-74fbaeeb20bb
 # ╟─257bada4-8250-4603-97f2-c07c307caf9b
 # ╟─b1251b44-297c-497e-8586-1d2b59996454
 # ╟─5bfe7a82-965c-4edc-8808-99e29d05605e
 # ╟─61ed6eb1-df65-446d-9674-9a7a50b73138
 # ╟─fcafa82b-cfeb-4257-92f1-455375b79532
-# ╟─bee7cfd7-c50b-48fe-ae3b-857fd42a9716
-# ╟─40966a45-c3f0-4769-85aa-65dcadd5c3e6
-# ╟─2736d5f3-4285-4bef-beaf-c6d318fa9ab6
-# ╟─5474d87c-3454-4192-8086-6acfd050f760
+# ╠═bee7cfd7-c50b-48fe-ae3b-857fd42a9716
+# ╠═40966a45-c3f0-4769-85aa-65dcadd5c3e6
+# ╠═2736d5f3-4285-4bef-beaf-c6d318fa9ab6
+# ╠═5474d87c-3454-4192-8086-6acfd050f760
 # ╟─e333fd27-1499-4505-8276-12648fb0357c
 # ╟─12cbbf33-822a-40a4-abb3-248e0031d39c
 # ╟─72da8f1b-a8ed-4549-84dd-45075b49a559
 # ╟─e4427075-3f3a-4771-b3a0-14c20f7accb2
-# ╟─27d73660-910e-40d8-a7b4-4a1a03852cf8
+# ╟─0f0779e8-4c07-455b-a761-fc41693c25c0
 # ╟─3ca3df7f-472b-4485-b470-db206f6bfe36
 # ╟─7503724c-113b-4e71-9af5-86ebf408c3b1
 # ╟─85a9fe4b-d346-43e0-8045-290f9d6b7c8c
@@ -2461,22 +2355,5 @@ version = "1.4.1+0"
 # ╟─b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
 # ╟─b986679b-b27f-4658-b750-cbdf31bb7791
-# ╠═6ac5456f-1f20-4b33-af1c-3ab43e978426
-# ╠═95c33961-3fb9-4a3c-b934-b6750003a134
-# ╠═0f223209-4be5-4961-ab0e-f0e841be5933
-# ╟─d868121d-49a3-4c03-b28f-226ba79961de
-# ╟─33aa41e8-89b0-47f2-9d45-c7973f908d45
-# ╟─d245f0a1-7a31-4d11-8991-d17bdfad0012
-# ╟─0d4a8388-908a-41bb-b7ff-297a12842fe2
-# ╟─76563a49-cd30-4a35-8069-0647b72749e5
-# ╠═3c511955-b784-41ac-adc5-ea094eeaab72
-# ╠═cb987dad-ae48-4822-b5d0-6da6b8e5c46f
-# ╠═817bf491-d72c-4da0-be02-999b7b07a78d
-# ╠═876f2d5b-2097-4aa0-8fc8-b1065f0804e4
-# ╠═dfbcdd5f-4c3b-4bd1-af2e-18851510d36b
-# ╠═c0a1ebb5-fc55-443e-90da-50d472a9e5f8
-# ╠═e7577869-c506-422a-9615-bfbe9b404a21
-# ╠═afde2b0f-014a-4ec5-b6a5-838a8439649e
-# ╠═6d003464-48b9-49ed-8391-ca6dd97b49bd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
