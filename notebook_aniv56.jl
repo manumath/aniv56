@@ -20,8 +20,34 @@ using Pkg,OrdinaryDiffEq, AbstractAlgebra, Polynomials, LinearAlgebra, PlutoUI, 
 # ╔═╡ fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
 using Plots
 
-# ╔═╡ 44b355a7-e4f0-4507-93b3-5cf5ef88996b
-html"<button onclick='present()' style='background-color: #4CAF50;
+# ╔═╡ b6be95c2-d187-433a-82a1-089410ef5580
+html"""
+<div style="
+position: absolute;
+width: calc(100% - 30px);
+border: 50vw solid #282936;
+border-top: 500px solid #282936;
+border-bottom: none;
+box-sizing: content-box;
+left: calc(-50vw + 15px);
+top: -500px;
+height: 800px;
+pointer-events: none;
+"></div>
+
+<div style="
+height: 800px;
+width: 100%;
+background: #282936;
+color: #fff;
+padding-top: 68px;
+">
+<span style="
+font-family: Vollkorn, serif;
+font-weight: 700;
+font-feature-settings: 'lnum', 'pnum';
+"> 
+<button onclick='present()' style='background-color: #4CAF50;
     border: none;
     color: white;
     padding: 15px 32px;
@@ -31,7 +57,36 @@ html"<button onclick='present()' style='background-color: #4CAF50;
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;'>Iniciar Presentación</button>
-"
+<p style="
+font-size: 1.5rem;
+opacity: .8;
+"><em>JORNADAS ACADÉMICAS</em></p>
+<p style="
+font-size: 1.5rem;
+opacity: .8;
+"><em>56 ANIVERSARIO DE LA CARRERA DE MATEMÁTICA</em></p>
+
+<p style="text-align: center; font-size: 2rem;">
+<em> Problemas inversos de autovalores para matrices Jacobi periódicas y generalizadas a partir de sus datos espectrales extremales </em>
+</p>
+
+<p style="
+font-size: 1.5rem;
+text-align: center;
+opacity: .8;
+"><em>Charlie Lozano</em></p>
+<div style="display: flex; justify-content: center;">
+<div  notthestyle="position: relative; right: 0; top: 0; z-index: 300;">
+
+</div>
+</div>
+</div>
+
+<style>
+body {
+overflow-x: hidden;
+}
+</style>"""
 
 # ╔═╡ 3feaf757-ff48-44a2-a215-575fe612674d
 begin
@@ -48,6 +103,11 @@ begin
 	    write(io, """</div></div>""")
 	end
 end
+
+# ╔═╡ 74595914-a089-4984-961f-a9d19614675d
+md"""
+##
+"""
 
 # ╔═╡ 493fcf66-26af-4fca-b613-2591750e5d30
 html"""<div><img src="https://i.imgur.com/w0TKAZn.png" style="width: 100%";></div>"""
@@ -86,26 +146,18 @@ import OrdinaryDiffEq.solve as de_solve
 # import Plotly.scatter as pscatter
 
 # ╔═╡ 0672057b-e46b-46e9-a910-6847b94e5732
-Pkg.resolve()
+# Pkg.resolve()
 
 # ╔═╡ 19aa0519-e543-4899-9ccc-0c0469ace8be
 plotly()
-
-# ╔═╡ d4424b6e-caaa-11ed-1dec-a9ac17e78b8e
-md"""
-# JORNADAS ACADÉMICAS
-### 56 ANIVERSARIO DE LA CARRERA DE MATEMÁTICA
-> #### Problemas inversos de autovalores para matrices Jacobi periódicas y generalizadas a partir de sus datos espectrales extremales
-##### `Charlie A. Lozano`
-"""
 
 # ╔═╡ 19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
 md"""
 # Matrices
 
-> ### _"Almost every combination of the adjectives proper, latent, characteristic, eigen and secular, with the nouns root, number and value, has been used in the literature for what we call a proper valor."_ Finite-Dimensional Vector Spaces, Halmos (1974)
+> #### _"Almost every combination of the adjectives proper, latent, characteristic, eigen and secular, with the nouns root, number and value, has been used in the literature for what we call a proper valor."_ Finite-Dimensional Vector Spaces, Halmos (1974)
 
-> ### _"Vibrations are everywhere, and so too are the eigenvalue associated with them."_ Parlett (1998)
+> #### _"Vibrations are everywhere, and so too are the eigenvalue associated with them."_ Parlett (1998)
 
 
 """
@@ -122,24 +174,32 @@ md"""
 
 # ╔═╡ 3e242dd6-2dd5-4931-b3fa-a897fd3c0878
 TwoColumn(md""" 
-Dada una matriz 
 
+#### Autovalores/Autovectores
+Dada una matriz
 
 $$A=\left(\begin{matrix}A_{11}&A_{12}&\cdots&A_{1n}\\A_{21}&A_{22}&\cdots&A_{2n}\\\vdots&\vdots&\ddots&\vdots\\A_{n1}&A_{n2}&\cdots&A_{nn}\end{matrix}\right)$$
 
 
-real o compleja, un número (real o complejo) ``λ`` es un **auto-valor** de ``A`` si se cumple alguna de las siguientes condiciones:
+Un número ``λ`` es un **auto-valor** de ``A`` si
 
-1. Existe vector no nulo ``x`` tal que ``Ax=λx``
-2. La matriz ``A-λI`` no es inversible
-3. ``λ`` es una raíz del polinomio ``p(λ)=\det(A-λI)`` 
+> - Existe vector no nulo ``x`` tal que ``Ax=λx`` se denominan **auto-vectores** (del auto-valor ``λ``)
+> - La matriz ``A-λI`` no es inversible
+> - ``λ`` es una raíz del polinomio ``p(λ)=\det(A-λI)`` 
 """,
 md"""
-- ``p(λ)`` se denomina **polinomio característico** de ``A``
-- Los vectores no nulos ``x`` para los que ``Ax=λx`` se denominan **auto-vectores** (del auto-valor ``λ``), junto al vector nulo forman un subespacio vectorial  ``\mathcal{N}_{\lambda}=\ker(A-λI)`` y se denomina **auto-espacio** del auto-valor ``λ``
-- Geométricamente 
+#### Polinomio característico
+> - ``p(λ)=\det(A-λI)`` se denomina **polinomio característico** de ``A``
+> - Los auto-vectores ``x`` del auto-valor ``λ,`` junto al vector nulo forman un subespacio vectorial  ``\mathcal{N}_{\lambda}=\ker(A-λI)`` y se denomina **auto-espacio** del auto-valor ``λ`` y el par ``(\lambda,x)`` **auto-par** (eigen-par)
+
+Geométricamente 
 
 """)
+
+# ╔═╡ 588a23a5-1d2c-4a32-b3d8-779f89793a5a
+md"""
+##
+"""
 
 # ╔═╡ 13b2fc98-2173-4638-9ada-0aeef70d795d
 html"""
@@ -230,29 +290,49 @@ begin
 	plot(scatter(eigS,label=false),begin plot(minimum(reigS)-1:0.1:maximum(reigS)+1,x->det(x* diagm(0=>ones(m))-S),lw=3,label=" Polinomio característico"); scatter!(reigSpoints,label=" Autovalores reales") end)
 end
 
-# ╔═╡ 5bfe7a82-965c-4edc-8808-99e29d05605e
+# ╔═╡ b1251b44-297c-497e-8586-1d2b59996454
 md"""
-# Problemas directos vs Problemas inversos
-
-- El proceso de analizar y derivar la información espectral y, por lo tanto, inferir el comportamiento dinámico de un sistema a partir de parámetros físicos conocidos a priori, como masa, longitud, elasticidad, inductancia, capacitancia, etc., se denomina **problema directo**.
-
-- El **problema inverso** entonces es validar, determinar o estimar los parámetros del sistema de acuerdo con su comportamiento observado o esperado.
-
+# Problema Inverso de Autovalores
 """
+
+# ╔═╡ 5bfe7a82-965c-4edc-8808-99e29d05605e
+TwoColumn(md"""
+##### Problemas directos y Problemas inversos
+
+> Analizar y derivar la información espectral e inferir el comportamiento dinámico de un sistema a partir de parámetros (físicos) conocidos a priori (como masa, longitud, elasticidad, inductancia, capacitancia, etc.), se denomina **problema directo**.
+
+> El **problema inverso** es validar, determinar o estimar los parámetros del sistema de acuerdo con su comportamiento observado o esperado.
+
+""",md"""
+##### Problema inverso de autovalores (IEP) 
+
+> En el contexto de matrices, un **problema inverso de autovalores (IEP)** se refiere a la reconstrucción de una matriz a partir de datos espectrales prescritos.
+
+> Problemas fundamentales:
+> - *Solubilidad*
+> - *Computabilidad*
+> - *Sensibilidad*
+> - *Aplicabilidad*
+
+""")
 
 # ╔═╡ 61ed6eb1-df65-446d-9674-9a7a50b73138
 md"""
-## Problema inverso de autovalores (Inverse eigenvalue problem) 
+## Algunas aplicaciones
+> *diseño de control, identificación de sistemas, tomografía sísmica, análisis de componentes principales, exploración y detección remota, procesamiento de conjuntos de antenas, geofísica, espectroscopía molecular, física de partículas, análisis estructural, teoría de circuitos y simulación de sistemas mecánicos.* 
 
-En el contexto de matrices, un **problema inverso de autovalores (IEP)** se refiere a la reconstrucción de una matriz a partir de datos espectrales prescritos.
+"""
 
-Cuatro problemáticas fundamentales asociadas con cualquier IEP son:
-- la teoría de la *solubilidad*,
-- la práctica de la *computabilidad*, 
-- el análisis de *sensibilidad*, y 
-- la realidad de la *aplicabilidad*.
+# ╔═╡ fcafa82b-cfeb-4257-92f1-455375b79532
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/521491380.sd.mp4?s=be703a8900a87be1d1e095c4befe0fc6d14f4eeb&profile_id=165&oauth2_token_id=57447761"></div>
 
-De los problemas inversos de autovalores surgen en una notable variedad de aplicaciones. La lista incluye el *diseño de control, identificación de sistemas, tomografía sísmica, análisis de componentes principales, exploración y detección remota, procesamiento de conjuntos de antenas, geofísica, espectroscopía molecular, física de partículas, análisis estructural, teoría de circuitos y simulación de sistemas mecánicos.* 
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/392289251.sd.mp4?s=0b80dc8802ce4e423dc5cfac641b046e2eac208b&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/372334720.sd.mp4?s=3b94e2d48b5844adcda82889e4809589de5d9172&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="
+https://player.vimeo.com/external/530526774.sd.mp4?s=30c764f4df73afe47e971d23951d9f23a1ff3b94&profile_id=164&oauth2_token_id=57447761"></div>
 
 """
 
@@ -278,9 +358,9 @@ end;
 # ╔═╡ bee7cfd7-c50b-48fe-ae3b-857fd42a9716
 begin
 	f(u,p,t) = A*u
-	u0 = [0.5,0.5,0.5]
+	u0 = [0.8,0.8,0.8]
 	u1 = [1,1,1]
-	u2 = [2,2,2]
+	u2 = [1.2,1.2,1.2]
 	tspan = (0.0,30.0)
 	prob0 = ODEProblem(f,u0,tspan)
 	prob1 = ODEProblem(f,u1,tspan)
@@ -330,15 +410,11 @@ md"""
 
 # ╔═╡ e4427075-3f3a-4771-b3a0-14c20f7accb2
 md"""
-##
+## El Sistema Lineal
 """
 
 # ╔═╡ 27d73660-910e-40d8-a7b4-4a1a03852cf8
-md"$A=$",latexify(A),md"$B=$",latexify(B)
-
-# ╔═╡ 551485ef-0cd0-4fd8-8e88-bfdceceb1ff3
-slidera,sliderb
-
+md"$A=$",latexify(A),slidera
 
 # ╔═╡ 3ca3df7f-472b-4485-b470-db206f6bfe36
 begin
@@ -346,7 +422,7 @@ begin
 		plot(x0,y0,z0)
 		plot!(x1,y1,z1)
 		plot!(x2,y2,z2)
-		plot!(x3,y3,z3)
+		#plot!(x3,y3,z3)
 	end
 	p2=begin
 		plot(x0,y0)
@@ -572,6 +648,197 @@ md"""
 md"""
 # Matrices periódicas de Jacobi a partir de datos espectrales especiales
 """
+
+# ╔═╡ 6ac5456f-1f20-4b33-af1c-3ab43e978426
+let
+
+range = -1.5:.1:1.5
+md"""
+	
+This is a "scrubbable" matrix: click on the number and drag to change!
+	
+**A =**  
+	
+``(``	
+ $(@bind aa Scrubbable( range; default=1.0))
+ $(@bind bb Scrubbable( range; default=0.0))
+``)``
+
+``(``
+$(@bind cc Scrubbable(range; default=0.0 ))
+$(@bind dd Scrubbable(range; default=1.0)) 
+``)``  
+	
+
+	
+"""
+end
+
+# ╔═╡ d868121d-49a3-4c03-b28f-226ba79961de
+md"""
+zoom = $(@bind  z Scrubbable(.1:.1:3,  default=1))
+"""
+
+# ╔═╡ 33aa41e8-89b0-47f2-9d45-c7973f908d45
+md"""
+pan = [$(@bind panx Scrubbable(-1:.1:1, default=0)), 
+$(@bind pany Scrubbable(-1:.1:1, default=0)) ]
+"""
+
+# ╔═╡ d245f0a1-7a31-4d11-8991-d17bdfad0012
+md"""
+α= $(@bind α Slider(-30:.1:30, show_value=true, default=0))
+β= $(@bind β Slider(-10:.1:10, show_value=true, default = 5))
+h= $(@bind h Slider(.1:.1:10, show_value=true, default = 5))
+"""
+
+# ╔═╡ 0d4a8388-908a-41bb-b7ff-297a12842fe2
+md"""
+pixels = $(@bind pixels Slider(1:1000, default=800, show_value=true))
+"""
+
+# ╔═╡ 76563a49-cd30-4a35-8069-0647b72749e5
+md"""
+Circular Frame $(@bind circular CheckBox(default=true))
+radius = $(@bind r Slider(.1:.1:1, show_value=true, default = 1))
+"""
+
+# ╔═╡ cb987dad-ae48-4822-b5d0-6da6b8e5c46f
+md"""
+Above: The original image is placed in a [-1,1] x [-1 1] box and transformed.
+"""
+
+# ╔═╡ 817bf491-d72c-4da0-be02-999b7b07a78d
+AAA = [aa bb ; cc dd];
+
+# ╔═╡ 876f2d5b-2097-4aa0-8fc8-b1065f0804e4
+longcorgi_url = "https://user-images.githubusercontent.com/6933510/110868198-713faa80-82c8-11eb-8264-d69df4509f49.png"
+
+# ╔═╡ dfbcdd5f-4c3b-4bd1-af2e-18851510d36b
+img_original = load(download(longcorgi_url));
+
+# ╔═╡ c0a1ebb5-fc55-443e-90da-50d472a9e5f8
+begin
+	lin(a, b, c, d) = ((x, y),) -> (a*x + b*y, c*x + d*y)
+	
+	lin(A) = v-> A * [v...]  # linear algebra version using matrix multiplication
+end
+
+# ╔═╡ 0f223209-4be5-4961-ab0e-f0e841be5933
+# T⁻¹ = id
+#  T⁻¹ = rotate(α)
+ # T⁻¹ = shear(α)
+  T⁻¹ = lin(A) # uses the scrubbable 
+#   T⁻¹ = shear(α) ∘ shear(-α)
+ # T⁻¹ = nonlin_shear(α)  
+ #   T⁻¹ =   inverse(nonlin_shear(α))
+#    T⁻¹ =  nonlin_shear(-α)
+#  T⁻¹ =  xy 
+# T⁻¹ = warp(α)
+# T⁻¹ = ((x,y),)-> (x+α*y^2,y+α*x^2) # may be non-invertible
+
+# T⁻¹ = ((x,y),)-> (x,y^2)  
+# T⁻¹  = flipy ∘ ((x,y),) ->  ( (β*x - α*y)/(β - y)  , -h*y/ (β - y)   ) 
+
+# ╔═╡ afde2b0f-014a-4ec5-b6a5-838a8439649e
+begin
+	 id((x, y)) = SA[x, y]
+	
+	 scalex(α) = ((x, y),) -> SA[α*x,  y]
+	 scaley(α) = ((x, y),) -> SA[x,   α*y]
+	 scale(α)  = ((x, y),) -> SA[α*x, α*y]
+	
+	 swap((x, y))  = SA[y, x]
+	 flipy((x, y)) = SA[x, -y]
+	
+	 rotate(θ) = ((x, y),) -> SA[cos(θ)*x + sin(θ)*y, -sin(θ)*x + cos(θ)*y]
+	 shear(α)  = ((x, y),) -> SA[x + α*y, y]
+end
+
+# ╔═╡ 6d003464-48b9-49ed-8391-ca6dd97b49bd
+begin
+  translate(α,β)  = ((x, y),) -> SA[x+α, y+β]   # affine, but not linear
+	
+  nonlin_shear(α) = ((x, y),) -> SA[x, y + α*x^2]
+	
+  warp(α)    = ((x, y),) -> rotate(α*√(x^2+y^2))(SA[x, y])
+  xy((r, θ)) = SA[ r*cos(θ), r*sin(θ) ]
+  rθ(x)      = SA[norm(x), atan(x[2],x[1]) ] 
+  
+  # exponentialish =  ((x,y),) -> [log(x+1.2), log(y+1.2)]
+  # merc = ((x,y),) ->  [ log(x^2+y^2)/2 , atan(y,x) ] # (reim(log(complex(y,x)) ))
+end
+
+# ╔═╡ e7577869-c506-422a-9615-bfbe9b404a21
+begin
+	function transform_xy_to_ij(img::AbstractMatrix, x::Float64, y::Float64)
+	# convert coordinate system xy to ij 
+	# center image, and use "white" when out of the boundary
+		
+		rows, cols = size(img)
+		m = max(cols, rows)	
+		
+	    # function to take xy to ij
+		xy_to_ij =  translate(rows/2, cols/2) ∘ swap ∘ flipy ∘ scale(m/2)
+		
+		# apply the function and "snap to grid"
+		i, j = floor.(Int, xy_to_ij((x, y))) 
+	
+	end
+	
+	function getpixel(img,i::Int,j::Int; circular::Bool=false, r::Real=200)   
+		#  grab image color or place default
+		rows, cols = size(img)
+		m = max(cols,rows)
+		if circular
+			c = (i-rows/2)^2 + (j-cols/2)^2 ≤ r*m^2/4
+		else
+			c = true
+		end
+		
+		if 1 < i ≤ rows && 1 < j ≤ cols && c
+			img[i, j]
+		else
+			# white(img[1, 1])
+			black(img[1,1])
+		end
+		
+	end
+	
+	
+	# function getpixel(img,x::Float64,y::Float64)
+	# 	i,j = transform_xy_to_ij(img,x,y)
+	# 	getpixel(img,i,j)
+	# end
+	
+	function transform_ij_to_xy(i::Int,j::Int,pixels)
+	
+	   ij_to_xy =  scale(2/pixels) ∘ flipy ∘ swap ∘ translate(-pixels/2,-pixels/2)
+	   ij_to_xy([i,j])
+	end
+
+	    
+end
+
+# ╔═╡ 95c33961-3fb9-4a3c-b934-b6750003a134
+begin
+		[			    
+			begin
+			
+			 x, y = transform_ij_to_xy(i,j, pixels)
+			
+			X, Y = ( translate(-panx,-pany)  )([x,y])
+			 X, Y = ( T⁻¹∘scale(1/z)∘translate(-panx,-pany) )([x,y])
+			 i, j = transform_xy_to_ij(img,X,Y)
+			 getpixel(img,i,j; circular=circular, r=r)
+			end	 
+		
+			for i = 1:pixels, j = 1:pixels
+		]	
+end
+
+# ╔═╡ 3c511955-b784-41ac-adc5-ea094eeaab72
+transform_xy_to_ij(img,0.0,0.0)
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
@@ -2126,10 +2393,11 @@ version = "1.4.1+0"
 """
 
 # ╔═╡ Cell order:
-# ╟─44b355a7-e4f0-4507-93b3-5cf5ef88996b
+# ╟─b6be95c2-d187-433a-82a1-089410ef5580
 # ╟─3feaf757-ff48-44a2-a215-575fe612674d
+# ╟─74595914-a089-4984-961f-a9d19614675d
 # ╟─493fcf66-26af-4fca-b613-2591750e5d30
-# ╠═82387b99-2558-4dc7-b6a2-064a0f74b3f0
+# ╟─82387b99-2558-4dc7-b6a2-064a0f74b3f0
 # ╟─f042b24f-b3cc-4f4f-9c5b-f5675250e663
 # ╟─36aa8b1a-eb08-4b51-90a6-90d579b7bfad
 # ╟─12244d34-2085-4b99-a19d-dcda64901d3c
@@ -2142,10 +2410,10 @@ version = "1.4.1+0"
 # ╟─250bbc56-c12c-4994-a89a-04ed3f1964d2
 # ╟─0672057b-e46b-46e9-a910-6847b94e5732
 # ╟─19aa0519-e543-4899-9ccc-0c0469ace8be
-# ╟─d4424b6e-caaa-11ed-1dec-a9ac17e78b8e
 # ╟─19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
 # ╟─34b145ef-248a-4746-8082-ac0623440c32
 # ╟─3e242dd6-2dd5-4931-b3fa-a897fd3c0878
+# ╟─588a23a5-1d2c-4a32-b3d8-779f89793a5a
 # ╟─13b2fc98-2173-4638-9ada-0aeef70d795d
 # ╟─9fb9add2-d1b6-49d1-ab71-3923c9c104dc
 # ╟─eed3568d-e647-485f-ab68-9619c408e961
@@ -2161,8 +2429,10 @@ version = "1.4.1+0"
 # ╟─0804509e-a23d-411a-ac6a-6ba9c386fdfc
 # ╟─f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
 # ╟─257bada4-8250-4603-97f2-c07c307caf9b
+# ╟─b1251b44-297c-497e-8586-1d2b59996454
 # ╟─5bfe7a82-965c-4edc-8808-99e29d05605e
 # ╟─61ed6eb1-df65-446d-9674-9a7a50b73138
+# ╟─fcafa82b-cfeb-4257-92f1-455375b79532
 # ╟─bee7cfd7-c50b-48fe-ae3b-857fd42a9716
 # ╟─40966a45-c3f0-4769-85aa-65dcadd5c3e6
 # ╟─2736d5f3-4285-4bef-beaf-c6d318fa9ab6
@@ -2172,7 +2442,6 @@ version = "1.4.1+0"
 # ╟─72da8f1b-a8ed-4549-84dd-45075b49a559
 # ╟─e4427075-3f3a-4771-b3a0-14c20f7accb2
 # ╟─27d73660-910e-40d8-a7b4-4a1a03852cf8
-# ╟─551485ef-0cd0-4fd8-8e88-bfdceceb1ff3
 # ╟─3ca3df7f-472b-4485-b470-db206f6bfe36
 # ╟─7503724c-113b-4e71-9af5-86ebf408c3b1
 # ╟─85a9fe4b-d346-43e0-8045-290f9d6b7c8c
@@ -2192,5 +2461,22 @@ version = "1.4.1+0"
 # ╟─b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
 # ╟─b986679b-b27f-4658-b750-cbdf31bb7791
+# ╠═6ac5456f-1f20-4b33-af1c-3ab43e978426
+# ╠═95c33961-3fb9-4a3c-b934-b6750003a134
+# ╠═0f223209-4be5-4961-ab0e-f0e841be5933
+# ╟─d868121d-49a3-4c03-b28f-226ba79961de
+# ╟─33aa41e8-89b0-47f2-9d45-c7973f908d45
+# ╟─d245f0a1-7a31-4d11-8991-d17bdfad0012
+# ╟─0d4a8388-908a-41bb-b7ff-297a12842fe2
+# ╟─76563a49-cd30-4a35-8069-0647b72749e5
+# ╠═3c511955-b784-41ac-adc5-ea094eeaab72
+# ╠═cb987dad-ae48-4822-b5d0-6da6b8e5c46f
+# ╠═817bf491-d72c-4da0-be02-999b7b07a78d
+# ╠═876f2d5b-2097-4aa0-8fc8-b1065f0804e4
+# ╠═dfbcdd5f-4c3b-4bd1-af2e-18851510d36b
+# ╠═c0a1ebb5-fc55-443e-90da-50d472a9e5f8
+# ╠═e7577869-c506-422a-9615-bfbe9b404a21
+# ╠═afde2b0f-014a-4ec5-b6a5-838a8439649e
+# ╠═6d003464-48b9-49ed-8391-ca6dd97b49bd
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
