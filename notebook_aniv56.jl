@@ -15,7 +15,7 @@ macro bind(def, element)
 end
 
 # ╔═╡ 12244d34-2085-4b99-a19d-dcda64901d3c
-using Pkg,DifferentialEquations, AbstractAlgebra, Polynomials, LinearAlgebra, PlutoUI, Latexify
+using Pkg,OrdinaryDiffEq, AbstractAlgebra, Polynomials, LinearAlgebra, PlutoUI, Latexify
 
 # ╔═╡ fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
 using Plots
@@ -33,11 +33,27 @@ html"<button onclick='present()' style='background-color: #4CAF50;
     cursor: pointer;'>Iniciar Presentación</button>
 "
 
+# ╔═╡ 3feaf757-ff48-44a2-a215-575fe612674d
+begin
+	struct TwoColumn{L, R}
+	    left::L
+	    right::R
+	end
+	
+	function Base.show(io, mime::MIME"text/html", tc::TwoColumn)
+	    write(io, """<div style="display: flex;"><div style="flex: 50%;">""")
+	    show(io, mime, tc.left)
+	    write(io, """</div><div style="flex: 50%;">""")
+	    show(io, mime, tc.right)
+	    write(io, """</div></div>""")
+	end
+end
+
 # ╔═╡ 493fcf66-26af-4fca-b613-2591750e5d30
 html"""<div><img src="https://i.imgur.com/w0TKAZn.png" style="width: 100%";></div>"""
 
 # ╔═╡ 82387b99-2558-4dc7-b6a2-064a0f74b3f0
-theme(:dark)
+theme(:default)
 
 # ╔═╡ f042b24f-b3cc-4f4f-9c5b-f5675250e663
 TableOfContents()
@@ -57,14 +73,11 @@ html"""
 # ╔═╡ 6a31fe1a-d92d-4477-a622-bcd2855d0b0b
 #qrcode = Qrcode("https://github.com/")
 
-# ╔═╡ 552d8345-a1e8-440d-8343-7e2bcd8fc7e4
-
-
 # ╔═╡ 8006b746-85bb-4c25-ba6e-812b62e35b4a
 # using PlotlyBase
 
 # ╔═╡ d9dce1b0-b534-4740-ae36-20be872c8ca0
-import DifferentialEquations.solve as de_solve
+import OrdinaryDiffEq.solve as de_solve
 
 # ╔═╡ 20d889df-2165-48df-8a74-4a511c9206e2
 # import Plotly.plot as pplot
@@ -73,16 +86,17 @@ import DifferentialEquations.solve as de_solve
 # import Plotly.scatter as pscatter
 
 # ╔═╡ 0672057b-e46b-46e9-a910-6847b94e5732
-# Pkg.resolve()
+Pkg.resolve()
 
 # ╔═╡ 19aa0519-e543-4899-9ccc-0c0469ace8be
 plotly()
 
 # ╔═╡ d4424b6e-caaa-11ed-1dec-a9ac17e78b8e
-html"""
-<h1><p style="color:blue;">56 ANIVERSARIO DE LA CARRERA DE MATEMÁTICA</p> 
-<p style="color:red;">Problemas inversos de autovalores para matrices Jacobi periódicas y generalizadas a partir de sus datos espectrales extremales</p>
-<h3><p style="color:blue;">Charlie A. Lozano</h3>
+md"""
+# JORNADAS ACADÉMICAS
+### 56 ANIVERSARIO DE LA CARRERA DE MATEMÁTICA
+> #### Problemas inversos de autovalores para matrices Jacobi periódicas y generalizadas a partir de sus datos espectrales extremales
+##### `Charlie A. Lozano`
 """
 
 # ╔═╡ 19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
@@ -101,23 +115,35 @@ md"""
 
 
 
-# ╔═╡ 3e242dd6-2dd5-4931-b3fa-a897fd3c0878
+# ╔═╡ 34b145ef-248a-4746-8082-ac0623440c32
 md"""
-## 
+##
+"""
+
+# ╔═╡ 3e242dd6-2dd5-4931-b3fa-a897fd3c0878
+TwoColumn(md""" 
 Dada una matriz 
-```math 
-A=\left( \begin{matrix}A_{11}&A_{12}&\cdots&A_{1n}\\A_{21}&A_{22}&\cdots&A_{2n}\\\vdots&\vdots&\ddots&\vdots\\A_{n1}&A_{n2}&\cdots&A_{nn}\end{matrix}
-\right)
-``` real o compleja, un número (real o complejo) ``λ`` es un **auto-valor** de ``A`` si se cumple alguna de las siguientes condiciones:
+
+
+$$A=\left(\begin{matrix}A_{11}&A_{12}&\cdots&A_{1n}\\A_{21}&A_{22}&\cdots&A_{2n}\\\vdots&\vdots&\ddots&\vdots\\A_{n1}&A_{n2}&\cdots&A_{nn}\end{matrix}\right)$$
+
+
+real o compleja, un número (real o complejo) ``λ`` es un **auto-valor** de ``A`` si se cumple alguna de las siguientes condiciones:
 
 1. Existe vector no nulo ``x`` tal que ``Ax=λx``
 2. La matriz ``A-λI`` no es inversible
 3. ``λ`` es una raíz del polinomio ``p(λ)=\det(A-λI)`` 
-
+""",
+md"""
 - ``p(λ)`` se denomina **polinomio característico** de ``A``
 - Los vectores no nulos ``x`` para los que ``Ax=λx`` se denominan **auto-vectores** (del auto-valor ``λ``), junto al vector nulo forman un subespacio vectorial  ``\mathcal{N}_{\lambda}=\ker(A-λI)`` y se denomina **auto-espacio** del auto-valor ``λ``
 - Geométricamente 
 
+""")
+
+# ╔═╡ 13b2fc98-2173-4638-9ada-0aeef70d795d
+html"""
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Gx0PaWI9eYo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 """
 
 # ╔═╡ 9fb9add2-d1b6-49d1-ab71-3923c9c104dc
@@ -160,7 +186,7 @@ begin
 	eigA=ComplexF64.(eigen(AA).values);
 	reigA = [Real(eigA[i]) for i in 1:length(eigA) if is_real(eigA[i])==true];
 	reigApoints = [(Real(eigA[i]),0) for i in 1:length(eigA) if is_real(eigA[i])==true];
-	plot(scatter(eigA,label=false),begin plot((minimum(reigA)-1):0.1:(maximum(reigA)+1),x->det(x* diagm(0=>ones(3))-AA),lw=3,label=" Polinomio característico",color="orange"); scatter!(reigApoints,color="red",label=" Autovalores reales") end)
+	plot(scatter(eigA,label=false),begin plot((minimum(reigA)-1):0.1:(maximum(reigA)+1),x->det(x* diagm(0=>ones(3))-AA),lw=3,label=" Polinomio característico"); scatter!(reigApoints,label=" Autovalores reales") end)
 end
 
 # ╔═╡ 821993f1-41cc-43f2-81d0-11cec529fc59
@@ -186,7 +212,7 @@ latexify(R),sliderm,latexify(repr(charpoly(R)))
 begin
 	reigR = [Real(eigR[i]) for i in 1:length(eigR) if is_real(eigR[i])==true];
 	reigRpoints = [(Real(eigR[i]),0) for i in 1:length(eigR) if is_real(eigR[i])==true];
-	plot(scatter(eigR,label=false),begin plot(minimum(reigR)-1:0.1:maximum(reigR)+1,x->det(x* diagm(0=>ones(m))-R),lw=3,label=" Polinomio característico"); scatter!(reigRpoints,color="red",label=" Autovalores reales") end)
+	plot(scatter(eigR,label=false),begin plot(minimum(reigR)-1:0.1:maximum(reigR)+1,x->det(x* diagm(0=>ones(m))-R),lw=3,label=" Polinomio característico"); scatter!(reigRpoints,label=" Autovalores reales") end)
 end
 
 # ╔═╡ 0804509e-a23d-411a-ac6a-6ba9c386fdfc
@@ -201,7 +227,7 @@ latexify(S),sliderm,latexify(repr(charpoly(S)))
 begin
 	reigS = [Real(eigS[i]) for i in 1:length(eigS) if is_real(eigS[i])==true];
 	reigSpoints = [(Real(eigS[i]),0) for i in 1:length(eigS) if is_real(eigS[i])==true];
-	plot(scatter(eigS,label=false),begin plot(minimum(reigS)-1:0.1:maximum(reigS)+1,x->det(x* diagm(0=>ones(m))-S),lw=3,label=" Polinomio característico"); scatter!(reigSpoints,color="red",label=" Autovalores reales") end)
+	plot(scatter(eigS,label=false),begin plot(minimum(reigS)-1:0.1:maximum(reigS)+1,x->det(x* diagm(0=>ones(m))-S),lw=3,label=" Polinomio característico"); scatter!(reigSpoints,label=" Autovalores reales") end)
 end
 
 # ╔═╡ 5bfe7a82-965c-4edc-8808-99e29d05605e
@@ -280,6 +306,18 @@ end;
 md"""
 ## Problema de asignación de polos
 """
+
+# ╔═╡ 12cbbf33-822a-40a4-abb3-248e0031d39c
+TwoColumn(md"""
+- Diseñar un controlador para un sistema dinámico lineal que permita asignar los polos del sistema a ubicaciones deseadas en el plano complejo. 
+- Los polos son las raíces del denominador de la función de transferencia del sistema y representan la dinámica del sistema. 
+- La ubicación de los polos determina la estabilidad, la respuesta transitoria y la capacidad de seguimiento del sistema.
+- Las ubicaciones de los polos están determinadas por los requisitos de rendimiento, como la velocidad de respuesta, la amortiguación y el error estacionario. """,md"""
+- No todas las ubicaciones de polos son alcanzables, por lo que es posible que no sea posible asignar los polos a ubicaciones deseadas. 
+- La asignación de polos puede no ser única, lo que significa que puede haber varios controladores que satisfagan los mismos requisitos de rendimiento.
+- Existen varias técnicas para resolver el problema de asignación de polos, incluyendo el método de colocación de polos, el método de retroalimentación de estados y el método de diseño basado en observador.""")
+
+
 
 # ╔═╡ 72da8f1b-a8ed-4549-84dd-45075b49a559
 md"""
@@ -425,62 +463,6 @@ md"""
 ##
 """
 
-# ╔═╡ e6348de0-fd5a-48cc-9bce-8b7a334eba52
-md"""
-Las entradas en las esquinas inferior izquierda y superior derecha aparecen para que sea periódica. Si $b_n=0,\, J_n$ es una matriz tridiagonal simétrica también llamada matriz de Jacobi.
-"""
-
-# ╔═╡ f1bef616-9b29-4c89-890a-22d890120fb4
-md"""
-## Submatrices Principales 
-"""
-
-# ╔═╡ 45523ccb-0571-4c33-961d-f4517961c065
-
-
-# ╔═╡ a58574cf-fddd-485f-b22d-e38afece289a
-md"""
-## Problemas
-> **Problema 1.** Dado el conjunto ordenado de $2n-1$ números reales; $$\lambda_{1}^{(n)}<\cdots<\lambda_{1}^{(j)}<\cdots<\lambda_{1}^{(2)}<\lambda_{1}^{(1)}<\lambda_{2}^{(2)}<\cdots<\lambda_{j}^{(j)}<\cdots<\lambda_{n}^{(n)},$$ y un número real positivo $d$, construir una matriz periódica de Jacobi $J_n$ de tal forma que $\lambda_{1}^{(j)}$ y $\lambda_{j}^{(j)}$ son el valor propio más pequeño y más grande, respectivamente, de $J_j,\,j=1,2,\ldots,n$ y $b_n=d$.
-
-
-> **Problema 2.** Dado el conjunto ordenado de $2n-1$ números reales; $$\lambda_{1}^{(n)}<\cdots<\lambda_{1}^{(j)}<\cdots<\lambda_{1}^{(2)}<\lambda_{1}^{(1)}<\lambda_{2}^{(2)}<\cdots<\lambda_{j}^{(j)}<\cdots<\lambda_{n}^{(n)},$$ un vector $\mathbf{x}=(x_1,x_2,\ldots,x_n)^T$ with $x_i\neq0,\,i=1,2,\ldots,n$ y dos números reales positivos $d_{1}$ y $d_{2}$, construir una matriz Jacobi periódica generalizada $\mathcal{J}_n$ de tal forma que $\lambda_{1}^{(j)}$, and $\lambda_{j}^{(j)}$ son el valor propio más pequeño y más grande, respectivamente, de $\mathcal{J}_j,\,j=1,2,\ldots,n$, $\left(\lambda_{n}^{(n)},\mathbf{x}\right)$ es un eigenpar $\mathcal{J}_n$, $b_n=d_1$, y $c_n=d_2$.
-
-"""
-
-# ╔═╡ b986679b-b27f-4658-b750-cbdf31bb7791
-md"""
-# Matrices periódicas de Jacobi a partir de datos espectrales especiales
-"""
-
-# ╔═╡ 3feaf757-ff48-44a2-a215-575fe612674d
-begin
-	struct TwoColumn{L, R}
-	    left::L
-	    right::R
-	end
-	
-	function Base.show(io, mime::MIME"text/html", tc::TwoColumn)
-	    write(io, """<div style="display: flex;"><div style="flex: 50%;">""")
-	    show(io, mime, tc.left)
-	    write(io, """</div><div style="flex: 50%;">""")
-	    show(io, mime, tc.right)
-	    write(io, """</div></div>""")
-	end
-end
-
-# ╔═╡ 12cbbf33-822a-40a4-abb3-248e0031d39c
-TwoColumn(md"""
-- Diseñar un controlador para un sistema dinámico lineal que permita asignar los polos del sistema a ubicaciones deseadas en el plano complejo. 
-- Los polos son las raíces del denominador de la función de transferencia del sistema y representan la dinámica del sistema. 
-- La ubicación de los polos determina la estabilidad, la respuesta transitoria y la capacidad de seguimiento del sistema.
-- Las ubicaciones de los polos están determinadas por los requisitos de rendimiento, como la velocidad de respuesta, la amortiguación y el error estacionario. """,md"""
-- No todas las ubicaciones de polos son alcanzables, por lo que es posible que no sea posible asignar los polos a ubicaciones deseadas. 
-- La asignación de polos puede no ser única, lo que significa que puede haber varios controladores que satisfagan los mismos requisitos de rendimiento.
-- Existen varias técnicas para resolver el problema de asignación de polos, incluyendo el método de colocación de polos, el método de retroalimentación de estados y el método de diseño basado en observador.""")
-
-
-
 # ╔═╡ 9283bbb4-82c3-425d-acdf-d220f5f1a136
 TwoColumn(md"""
 ### Matrices de Jacobi periódicas
@@ -526,6 +508,19 @@ b_{n} & & & c_{n-1} & a_{n}
 donde $a_j, b_j, c_j\in\mathbb{R}$ y $b_jc_j>0,\,J=1,2,\ldots,n.$ 
 """)
 
+# ╔═╡ e6348de0-fd5a-48cc-9bce-8b7a334eba52
+md"""
+Las entradas en las esquinas inferior izquierda y superior derecha aparecen para que sea periódica. Si $b_n=0,\, J_n$ es una matriz tridiagonal simétrica también llamada matriz de Jacobi.
+"""
+
+# ╔═╡ f1bef616-9b29-4c89-890a-22d890120fb4
+md"""
+## Submatrices Principales 
+"""
+
+# ╔═╡ 45523ccb-0571-4c33-961d-f4517961c065
+
+
 # ╔═╡ b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 TwoColumn(md"""
 Dad una matriz periódica de Jacobi ``n\times n,`` $J_j$ denota la submatriz principal principal de $J_n$, 
@@ -563,13 +558,28 @@ Que se obtiene eliminando la primera fila y columna de la matriz $J_j,$ cuyo pol
 $$Q_{j}(\lambda)=\det(\lambda I_{j-1}-\tilde{J}_{j})$$ 
 """)
 
+# ╔═╡ a58574cf-fddd-485f-b22d-e38afece289a
+md"""
+## Problemas
+> **Problema 1.** Dado el conjunto ordenado de $2n-1$ números reales; $$\lambda_{1}^{(n)}<\cdots<\lambda_{1}^{(j)}<\cdots<\lambda_{1}^{(2)}<\lambda_{1}^{(1)}<\lambda_{2}^{(2)}<\cdots<\lambda_{j}^{(j)}<\cdots<\lambda_{n}^{(n)},$$ y un número real positivo $d$, construir una matriz periódica de Jacobi $J_n$ de tal forma que $\lambda_{1}^{(j)}$ y $\lambda_{j}^{(j)}$ son el valor propio más pequeño y más grande, respectivamente, de $J_j,\,j=1,2,\ldots,n$ y $b_n=d$.
+
+
+> **Problema 2.** Dado el conjunto ordenado de $2n-1$ números reales; $$\lambda_{1}^{(n)}<\cdots<\lambda_{1}^{(j)}<\cdots<\lambda_{1}^{(2)}<\lambda_{1}^{(1)}<\lambda_{2}^{(2)}<\cdots<\lambda_{j}^{(j)}<\cdots<\lambda_{n}^{(n)},$$ un vector $\mathbf{x}=(x_1,x_2,\ldots,x_n)^T$ with $x_i\neq0,\,i=1,2,\ldots,n$ y dos números reales positivos $d_{1}$ y $d_{2}$, construir una matriz Jacobi periódica generalizada $\mathcal{J}_n$ de tal forma que $\lambda_{1}^{(j)}$, and $\lambda_{j}^{(j)}$ son el valor propio más pequeño y más grande, respectivamente, de $\mathcal{J}_j,\,j=1,2,\ldots,n$, $\left(\lambda_{n}^{(n)},\mathbf{x}\right)$ es un eigenpar $\mathcal{J}_n$, $b_n=d_1$, y $c_n=d_2$.
+
+"""
+
+# ╔═╡ b986679b-b27f-4658-b750-cbdf31bb7791
+md"""
+# Matrices periódicas de Jacobi a partir de datos espectrales especiales
+"""
+
 # ╔═╡ 00000000-0000-0000-0000-000000000001
 PLUTO_PROJECT_TOML_CONTENTS = """
 [deps]
 AbstractAlgebra = "c3fe647b-3220-5bb0-a1ea-a7954cac585d"
-DifferentialEquations = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
 Latexify = "23fbe1c1-3f47-55db-b15f-69d7ec21a316"
 LinearAlgebra = "37e2e46d-f89d-539d-b4ee-838fcccc9c8e"
+OrdinaryDiffEq = "1dea7af3-3e70-54e6-95c3-0bf5283fa5ed"
 Pkg = "44cfe95a-1eb2-52ea-b672-e2afdf69b78f"
 Plots = "91a5bcdd-55d7-5caf-9e0b-520d859cae80"
 PlutoUI = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
@@ -577,8 +587,8 @@ Polynomials = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
 
 [compat]
 AbstractAlgebra = "~0.28.3"
-DifferentialEquations = "~7.7.0"
 Latexify = "~0.15.18"
+OrdinaryDiffEq = "~6.49.4"
 Plots = "~1.38.8"
 PlutoUI = "~0.7.50"
 Polynomials = "~3.2.8"
@@ -590,7 +600,7 @@ PLUTO_MANIFEST_TOML_CONTENTS = """
 
 julia_version = "1.8.5"
 manifest_format = "2.0"
-project_hash = "b84933cade7a9fd0ed8975aaae8b537853e2223a"
+project_hash = "cf687de88b88ba44a9ef5146a223d66382b157a4"
 
 [[deps.AbstractAlgebra]]
 deps = ["GroupsCore", "InteractiveUtils", "LinearAlgebra", "MacroTools", "Markdown", "Random", "RandomExtensions", "SparseArrays", "Test"]
@@ -632,20 +642,8 @@ git-tree-sha1 = "e5f08b5689b1aad068e01751889f2f615c7db36d"
 uuid = "30b0a656-2188-435a-8636-2ec0e6a096e2"
 version = "0.1.29"
 
-[[deps.ArrayLayouts]]
-deps = ["FillArrays", "LinearAlgebra", "SparseArrays"]
-git-tree-sha1 = "4aff5fa660eb95c2e0deb6bcdabe4d9a96bc4667"
-uuid = "4c555306-a7a7-4459-81d9-ec55ddd5c99a"
-version = "0.8.18"
-
 [[deps.Artifacts]]
 uuid = "56f22d72-fd6d-98f1-02f0-08ddc0907c33"
-
-[[deps.BandedMatrices]]
-deps = ["ArrayLayouts", "FillArrays", "LinearAlgebra", "SnoopPrecompile", "SparseArrays"]
-git-tree-sha1 = "04f8147bbf7ea9a72f957c9b4095909df3ab21b1"
-uuid = "aae01518-5342-5314-be14-df237901396f"
-version = "0.17.17"
 
 [[deps.Base64]]
 uuid = "2a0f44e3-6c83-55bd-87e4-b1978d98bd5f"
@@ -656,22 +654,11 @@ git-tree-sha1 = "0c5f81f47bbbcf4aea7b2959135713459170798b"
 uuid = "62783981-4cbd-42fc-bca8-16325de8dc4b"
 version = "0.1.5"
 
-[[deps.BoundaryValueDiffEq]]
-deps = ["BandedMatrices", "DiffEqBase", "FiniteDiff", "ForwardDiff", "LinearAlgebra", "NLsolve", "Reexport", "SciMLBase", "SparseArrays"]
-git-tree-sha1 = "ed8e837bfb3d1e3157022c9636ec1c722b637318"
-uuid = "764a87c0-6b3e-53db-9096-fe964310641d"
-version = "2.11.0"
-
 [[deps.Bzip2_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "19a35467a82e236ff51bc17a3a44b69ef35185a2"
 uuid = "6e34b625-4abd-537c-b88f-471c36dfa7a0"
 version = "1.0.8+0"
-
-[[deps.CEnum]]
-git-tree-sha1 = "eb4cb44a499229b3b8426dcfb5dd85333951ff90"
-uuid = "fa961155-64e5-5f13-b03f-caf6b980ea82"
-version = "0.4.2"
 
 [[deps.CPUSummary]]
 deps = ["CpuId", "IfElse", "Static"]
@@ -792,12 +779,6 @@ version = "1.0.0"
 deps = ["Printf"]
 uuid = "ade2ca70-3891-5945-98fb-dc099432e06a"
 
-[[deps.DelayDiffEq]]
-deps = ["ArrayInterface", "DataStructures", "DiffEqBase", "LinearAlgebra", "Logging", "OrdinaryDiffEq", "Printf", "RecursiveArrayTools", "Reexport", "SciMLBase", "SimpleNonlinearSolve", "SimpleUnPack"]
-git-tree-sha1 = "89f3fbfe78f9d116d1ed0721d65b0b2cf9b36169"
-uuid = "bcd4f6db-9728-5f36-b5f7-82caef46ccdb"
-version = "5.42.0"
-
 [[deps.DelimitedFiles]]
 deps = ["Mmap"]
 uuid = "8bb1440f-4735-579b-a4ab-409b98df4dab"
@@ -814,18 +795,6 @@ git-tree-sha1 = "15a24aa2414fad34136724c4a16e556f264ddd11"
 uuid = "2b5f629d-d688-5b77-993f-72d75c75574e"
 version = "6.122.1"
 
-[[deps.DiffEqCallbacks]]
-deps = ["DataStructures", "DiffEqBase", "ForwardDiff", "LinearAlgebra", "Markdown", "NLsolve", "Parameters", "RecipesBase", "RecursiveArrayTools", "SciMLBase", "StaticArraysCore"]
-git-tree-sha1 = "b497f63a13fe37e03ed7ac72d71b72aad17b46c4"
-uuid = "459566f4-90b8-5000-8ac3-15dfb0a30def"
-version = "2.26.0"
-
-[[deps.DiffEqNoiseProcess]]
-deps = ["DiffEqBase", "Distributions", "GPUArraysCore", "LinearAlgebra", "Markdown", "Optim", "PoissonRandom", "QuadGK", "Random", "Random123", "RandomNumbers", "RecipesBase", "RecursiveArrayTools", "Requires", "ResettableStacks", "SciMLBase", "StaticArrays", "Statistics"]
-git-tree-sha1 = "2c4ed3eedb87579bfe9f20ecc2440de06b9f3b89"
-uuid = "77a26b50-5914-5dd7-bc55-306e6241c503"
-version = "5.16.0"
-
 [[deps.DiffResults]]
 deps = ["StaticArraysCore"]
 git-tree-sha1 = "782dd5f4561f5d267313f23853baaaa4c52ea621"
@@ -837,12 +806,6 @@ deps = ["IrrationalConstants", "LogExpFunctions", "NaNMath", "Random", "SpecialF
 git-tree-sha1 = "a4ad7ef19d2cdc2eff57abbbe68032b1cd0bd8f8"
 uuid = "b552c78f-8df3-52c6-915a-8e097449b14b"
 version = "1.13.0"
-
-[[deps.DifferentialEquations]]
-deps = ["BoundaryValueDiffEq", "DelayDiffEq", "DiffEqBase", "DiffEqCallbacks", "DiffEqNoiseProcess", "JumpProcesses", "LinearAlgebra", "LinearSolve", "NonlinearSolve", "OrdinaryDiffEq", "Random", "RecursiveArrayTools", "Reexport", "SciMLBase", "SteadyStateDiffEq", "StochasticDiffEq", "Sundials"]
-git-tree-sha1 = "ac145e3d718157c679fc4febf2fcef73ec77b067"
-uuid = "0c46a032-eb83-5123-abaf-570d42b7fbaa"
-version = "7.7.0"
 
 [[deps.Distances]]
 deps = ["LinearAlgebra", "SparseArrays", "Statistics", "StatsAPI"]
@@ -1166,12 +1129,6 @@ git-tree-sha1 = "6f2675ef130a300a112286de91973805fcc5ffbc"
 uuid = "aacddb02-875f-59d6-b918-886e6ef4fbf8"
 version = "2.1.91+0"
 
-[[deps.JumpProcesses]]
-deps = ["ArrayInterface", "DataStructures", "DiffEqBase", "DocStringExtensions", "FunctionWrappers", "Graphs", "LinearAlgebra", "Markdown", "PoissonRandom", "Random", "RandomNumbers", "RecursiveArrayTools", "Reexport", "SciMLBase", "StaticArrays", "TreeViews", "UnPack"]
-git-tree-sha1 = "341cb268f83a2d214f12ba214489fb8fde2e3c54"
-uuid = "ccbc3e58-028d-4f4c-8cd5-9ae44345cda5"
-version = "9.6.0"
-
 [[deps.KLU]]
 deps = ["LinearAlgebra", "SparseArrays", "SuiteSparse_jll"]
 git-tree-sha1 = "764164ed65c30738750965d55652db9c94c59bfe"
@@ -1230,12 +1187,6 @@ deps = ["MacroTools"]
 git-tree-sha1 = "1370f8202dac30758f3c345f9909b97f53d87d3f"
 uuid = "50d2b5c4-7a5e-59d5-8109-a42b560f39c0"
 version = "0.15.1"
-
-[[deps.LevyArea]]
-deps = ["LinearAlgebra", "Random", "SpecialFunctions"]
-git-tree-sha1 = "56513a09b8e0ae6485f34401ea9e2f31357958ec"
-uuid = "2d8b4e74-eb68-11e8-0fb9-d5eb67b50637"
-version = "1.0.0"
 
 [[deps.LibCURL]]
 deps = ["LibCURL_jll", "MozillaCACerts_jll"]
@@ -1465,12 +1416,6 @@ git-tree-sha1 = "13652491f6856acfd2db29360e1bbcd4565d04f1"
 uuid = "efe28fd5-8261-553b-a9e1-b2916fc3738e"
 version = "0.5.5+0"
 
-[[deps.Optim]]
-deps = ["Compat", "FillArrays", "ForwardDiff", "LineSearches", "LinearAlgebra", "NLSolversBase", "NaNMath", "Parameters", "PositiveFactorizations", "Printf", "SparseArrays", "StatsBase"]
-git-tree-sha1 = "1903afc76b7d01719d9c30d3c7d501b61db96721"
-uuid = "429524aa-4258-5aef-a3af-852621145aeb"
-version = "1.7.4"
-
 [[deps.Opus_jll]]
 deps = ["Artifacts", "JLLWrappers", "Libdl", "Pkg"]
 git-tree-sha1 = "51a08fb14ec28da2ec7a927c4337e4332c2a4720"
@@ -1551,12 +1496,6 @@ git-tree-sha1 = "5bb5129fdd62a2bbbe17c2756932259acf467386"
 uuid = "7f904dfe-b85e-4ff6-b463-dae2292396a8"
 version = "0.7.50"
 
-[[deps.PoissonRandom]]
-deps = ["Random"]
-git-tree-sha1 = "a0f1159c33f846aa77c3f30ebbc69795e5327152"
-uuid = "e409e4f3-bfea-5376-8464-e040bb5c01ab"
-version = "0.4.4"
-
 [[deps.Polyester]]
 deps = ["ArrayInterface", "BitTwiddlingConvenienceFunctions", "CPUSummary", "IfElse", "ManualMemory", "PolyesterWeave", "Requires", "Static", "StaticArrayInterface", "StrideArraysCore", "ThreadingUtilities"]
 git-tree-sha1 = "0fe4e7c4d8ff4c70bfa507f0dd96fa161b115777"
@@ -1574,12 +1513,6 @@ deps = ["ChainRulesCore", "LinearAlgebra", "MakieCore", "RecipesBase"]
 git-tree-sha1 = "86efc6f761df655f8782f50628e45e01a457d5a2"
 uuid = "f27b6e38-b328-58d1-80ce-0feddd5e7a45"
 version = "3.2.8"
-
-[[deps.PositiveFactorizations]]
-deps = ["LinearAlgebra"]
-git-tree-sha1 = "17275485f373e6673f7e7f97051f703ed5b15b20"
-uuid = "85a6dd25-e78a-55b7-8502-1745935b8125"
-version = "0.2.4"
 
 [[deps.PreallocationTools]]
 deps = ["Adapt", "ArrayInterface", "ForwardDiff", "Requires"]
@@ -1617,23 +1550,11 @@ uuid = "3fa0cd96-eef1-5676-8a61-b3b8758bbffb"
 deps = ["SHA", "Serialization"]
 uuid = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
 
-[[deps.Random123]]
-deps = ["Random", "RandomNumbers"]
-git-tree-sha1 = "7a1a306b72cfa60634f03a911405f4e64d1b718b"
-uuid = "74087812-796a-5b5d-8853-05524746bad3"
-version = "1.6.0"
-
 [[deps.RandomExtensions]]
 deps = ["Random", "SparseArrays"]
 git-tree-sha1 = "062986376ce6d394b23d5d90f01d81426113a3c9"
 uuid = "fb686558-2515-59ef-acaa-46db3789a887"
 version = "0.4.3"
-
-[[deps.RandomNumbers]]
-deps = ["Random", "Requires"]
-git-tree-sha1 = "043da614cc7e95c703498a491e2c21f58a2b8111"
-uuid = "e6cf234a-135c-5ec9-84dd-332b85af5143"
-version = "1.5.3"
 
 [[deps.RecipesBase]]
 deps = ["SnoopPrecompile"]
@@ -1675,12 +1596,6 @@ deps = ["UUIDs"]
 git-tree-sha1 = "838a3a4188e2ded87a4f9f184b4b0d78a1e91cb7"
 uuid = "ae029012-a4dd-5104-9daa-d747884805df"
 version = "1.3.0"
-
-[[deps.ResettableStacks]]
-deps = ["StaticArrays"]
-git-tree-sha1 = "256eeeec186fa7f26f2801732774ccf277f05db9"
-uuid = "ae5879a3-cd67-5da8-be7f-38c6eb64a37b"
-version = "1.1.1"
 
 [[deps.Rmath]]
 deps = ["Random", "Rmath_jll"]
@@ -1857,18 +1772,6 @@ git-tree-sha1 = "f625d686d5a88bcd2b15cd81f18f98186fdc0c9a"
 uuid = "4c63d2b9-4356-54db-8cca-17b64c39e42c"
 version = "1.3.0"
 
-[[deps.SteadyStateDiffEq]]
-deps = ["DiffEqBase", "DiffEqCallbacks", "LinearAlgebra", "NLsolve", "Reexport", "SciMLBase"]
-git-tree-sha1 = "04a7d0bb1c824857ba0bb0c17bc5950dccbfdd5d"
-uuid = "9672c7b4-1e72-59bd-8a11-6ac3964bc41f"
-version = "1.14.0"
-
-[[deps.StochasticDiffEq]]
-deps = ["Adapt", "ArrayInterface", "DataStructures", "DiffEqBase", "DiffEqNoiseProcess", "DocStringExtensions", "FillArrays", "FiniteDiff", "ForwardDiff", "JumpProcesses", "LevyArea", "LinearAlgebra", "Logging", "MuladdMacro", "NLsolve", "OrdinaryDiffEq", "Random", "RandomNumbers", "RecursiveArrayTools", "Reexport", "SciMLBase", "SparseArrays", "SparseDiffTools", "StaticArrays", "UnPack"]
-git-tree-sha1 = "073da86200349ddf4ef8bc3e3f3acd62e1d554f7"
-uuid = "789caeaf-c7a9-5a7d-9973-96adeb23e2a0"
-version = "6.60.0"
-
 [[deps.StrideArraysCore]]
 deps = ["ArrayInterface", "CloseOpenIntervals", "IfElse", "LayoutPointers", "ManualMemory", "SIMDTypes", "Static", "StaticArrayInterface", "ThreadingUtilities"]
 git-tree-sha1 = "f859ab67ca232b777a03a6cee588c1c15f7ec40a"
@@ -1883,18 +1786,6 @@ uuid = "4607b0f0-06f3-5cda-b6b1-a6196a1729e9"
 deps = ["Artifacts", "Libdl", "Pkg", "libblastrampoline_jll"]
 uuid = "bea87d4a-7f5b-5778-9afe-8cc45184846c"
 version = "5.10.1+0"
-
-[[deps.Sundials]]
-deps = ["CEnum", "DataStructures", "DiffEqBase", "Libdl", "LinearAlgebra", "Logging", "Reexport", "SciMLBase", "SnoopPrecompile", "SparseArrays", "Sundials_jll"]
-git-tree-sha1 = "a4e8491c163d74fb92905c6443e59558f5e609a4"
-uuid = "c3572dad-4567-51f8-b174-8c6c989267f4"
-version = "4.16.0"
-
-[[deps.Sundials_jll]]
-deps = ["Artifacts", "CompilerSupportLibraries_jll", "JLLWrappers", "Libdl", "OpenBLAS_jll", "Pkg", "SuiteSparse_jll"]
-git-tree-sha1 = "04777432d74ec5bc91ca047c9e0e0fd7f81acdb6"
-uuid = "fb77eaff-e24c-56d4-86b1-d163f2edb164"
-version = "5.2.1+0"
 
 [[deps.SymbolicIndexingInterface]]
 deps = ["DocStringExtensions"]
@@ -1939,12 +1830,6 @@ deps = ["ManualMemory"]
 git-tree-sha1 = "c97f60dd4f2331e1a495527f80d242501d2f9865"
 uuid = "8290d209-cae3-49c0-8002-c8c24d57dab5"
 version = "0.5.1"
-
-[[deps.TreeViews]]
-deps = ["Test"]
-git-tree-sha1 = "8d0d7a3fe2f30d6a7f833a5f19f7c7a5b396eae6"
-uuid = "a2a6695c-b41b-5b7d-aed9-dbfdeacea5d7"
-version = "0.3.0"
 
 [[deps.TriangularSolve]]
 deps = ["CloseOpenIntervals", "IfElse", "LayoutPointers", "LinearAlgebra", "LoopVectorization", "Polyester", "Static", "VectorizationBase"]
@@ -2242,15 +2127,15 @@ version = "1.4.1+0"
 
 # ╔═╡ Cell order:
 # ╟─44b355a7-e4f0-4507-93b3-5cf5ef88996b
+# ╟─3feaf757-ff48-44a2-a215-575fe612674d
 # ╟─493fcf66-26af-4fca-b613-2591750e5d30
-# ╟─82387b99-2558-4dc7-b6a2-064a0f74b3f0
+# ╠═82387b99-2558-4dc7-b6a2-064a0f74b3f0
 # ╟─f042b24f-b3cc-4f4f-9c5b-f5675250e663
 # ╟─36aa8b1a-eb08-4b51-90a6-90d579b7bfad
 # ╟─12244d34-2085-4b99-a19d-dcda64901d3c
 # ╟─fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
 # ╟─629d548d-619c-4df3-985c-96fe273d907e
 # ╟─6a31fe1a-d92d-4477-a622-bcd2855d0b0b
-# ╠═552d8345-a1e8-440d-8343-7e2bcd8fc7e4
 # ╟─8006b746-85bb-4c25-ba6e-812b62e35b4a
 # ╟─d9dce1b0-b534-4740-ae36-20be872c8ca0
 # ╟─20d889df-2165-48df-8a74-4a511c9206e2
@@ -2259,7 +2144,9 @@ version = "1.4.1+0"
 # ╟─19aa0519-e543-4899-9ccc-0c0469ace8be
 # ╟─d4424b6e-caaa-11ed-1dec-a9ac17e78b8e
 # ╟─19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
+# ╟─34b145ef-248a-4746-8082-ac0623440c32
 # ╟─3e242dd6-2dd5-4931-b3fa-a897fd3c0878
+# ╟─13b2fc98-2173-4638-9ada-0aeef70d795d
 # ╟─9fb9add2-d1b6-49d1-ab71-3923c9c104dc
 # ╟─eed3568d-e647-485f-ab68-9619c408e961
 # ╟─6f4f7f73-abea-4507-bdd6-16c37ad1e818
@@ -2305,6 +2192,5 @@ version = "1.4.1+0"
 # ╟─b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
 # ╟─b986679b-b27f-4658-b750-cbdf31bb7791
-# ╟─3feaf757-ff48-44a2-a215-575fe612674d
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
