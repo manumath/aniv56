@@ -90,6 +90,9 @@ md"""
 _Al ejecutar este portátil por primera vez, esto podría tardar hasta 15 minutos. ¡Agárrate!_
 """
 
+# ╔═╡ 0d58871d-e07b-49a4-8bbb-122fd89e0940
+
+
 # ╔═╡ 890d30b9-2cd0-4d3a-99f6-f7d3d7858fda
 corgis_url = "https://i.imgur.com/BYsRQYM.jpg"
 
@@ -240,22 +243,6 @@ begin
 	 shear(α)  = ((x, y),) -> SA[x + α*y, y]
 end
 
-# ╔═╡ 58a30e54-7a08-11eb-1c57-dfef0000255f
-# T⁻¹ = id
-  T⁻¹ = rotate(α)
- # T⁻¹ = shear(α)
-  #T⁻¹ = lin(A) # uses the scrubbable 
-#   T⁻¹ = shear(α) ∘ shear(-α)
- # T⁻¹ = nonlin_shear(α)  
- #   T⁻¹ =   inverse(nonlin_shear(α))
-#    T⁻¹ =  nonlin_shear(-α)
-#  T⁻¹ =  xy 
-# T⁻¹ = warp(α)
-# T⁻¹ = ((x,y),)-> (x+α*y^2,y+α*x^2) # may be non-invertible
-
-# T⁻¹ = ((x,y),)-> (x,y^2)  
-# T⁻¹  = flipy ∘ ((x,y),) ->  ( (β*x - α*y)/(β - y)  , -h*y/ (β - y)   ) 
-
 # ╔═╡ 080d87e0-7aa2-11eb-18f5-2fb6a7a5bcb4
 md"""
 De hecho, podemos escribir la transformación lineal *más general* de una de dos maneras:"""
@@ -266,6 +253,22 @@ begin
 	
 	lin(A) = v-> A * [v...]  # Versión de álgebra lineal usando multiplicación de matrices
 end
+
+# ╔═╡ 58a30e54-7a08-11eb-1c57-dfef0000255f
+# T⁻¹ = id
+ # T⁻¹ = rotate(α)
+ # T⁻¹ = shear(α)
+  T⁻¹ = lin(A) # uses the scrubbable 
+#   T⁻¹ = shear(α) ∘ shear(-α)
+ # T⁻¹ = nonlin_shear(α)  
+ #   T⁻¹ =   inverse(nonlin_shear(α))
+#    T⁻¹ =  nonlin_shear(-α)
+#  T⁻¹ =  xy 
+# T⁻¹ = warp(α)
+# T⁻¹ = ((x,y),)-> (x+α*y^2,y+α*x^2) # may be non-invertible
+
+# T⁻¹ = ((x,y),)-> (x,y^2)  
+# T⁻¹  = flipy ∘ ((x,y),) ->  ( (β*x - α*y)/(β - y)  , -h*y/ (β - y)   ) 
 
 # ╔═╡ 2612d2c2-7aa2-11eb-085a-1f27b6174995
 md"""
@@ -1634,10 +1637,11 @@ version = "17.4.0+0"
 # ╟─b7895bd2-7634-11eb-211e-ef876d23bd88
 # ╟─230b0118-30b7-4035-ad31-520165a76fcc
 # ╟─6b473b2d-4326-46b4-af38-07b61de287fc
-# ╟─96766502-7a06-11eb-00cc-29849773dbcf
-# ╟─890d30b9-2cd0-4d3a-99f6-f7d3d7858fda
-# ╟─85fba8fb-a9ea-444d-831b-ec6489b58b4f
-# ╟─06beabc3-2aa7-4e78-9bae-dc4b37251aa2
+# ╠═96766502-7a06-11eb-00cc-29849773dbcf
+# ╟─0d58871d-e07b-49a4-8bbb-122fd89e0940
+# ╠═890d30b9-2cd0-4d3a-99f6-f7d3d7858fda
+# ╠═85fba8fb-a9ea-444d-831b-ec6489b58b4f
+# ╠═06beabc3-2aa7-4e78-9bae-dc4b37251aa2
 # ╟─26dd0e98-7a75-11eb-2196-5d7bda201b19
 # ╟─e0b657ce-7a03-11eb-1f9d-f32168cb5394
 # ╟─005ca75a-7622-11eb-2ba4-9f450e71df1f
