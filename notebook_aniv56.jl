@@ -119,7 +119,7 @@ html"""<div><img src="https://i.imgur.com/w0TKAZn.png" style="width: 100%";></di
 theme(:default)
 
 # ╔═╡ f042b24f-b3cc-4f4f-9c5b-f5675250e663
-PlutoUI.TableOfContents(aside=true)
+# PlutoUI.TableOfContents(aside=true)
 
 # ╔═╡ 36aa8b1a-eb08-4b51-90a6-90d579b7bfad
 html"""
@@ -154,6 +154,76 @@ import OrdinaryDiffEq.solve as de_solve
 # ╔═╡ 19aa0519-e543-4899-9ccc-0c0469ace8be
 plotly()
 
+# ╔═╡ 34b145ef-248a-4746-8082-ac0623440c32
+md"""
+##
+"""
+
+# ╔═╡ 3cd870c7-1567-411c-84a9-6abd58d8fe20
+md"""
+## DJ en apuros
+"""
+
+# ╔═╡ a77069c6-f158-431c-9e52-4c3f20572111
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/324296539.sd.mp4?s=806775db4de3140951b439ef4b2a69c8bd91fa0f&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/406192053.sd.mp4?s=47d7e32a5c532eb2738b6c7d8bee64541fe3a1ec&profile_id=164&oauth2_token_id=57447761"></div>
+
+"""
+
+# ╔═╡ 53f67ce4-4aac-486c-a4f5-24a5b7b9a654
+md"""
+## Angustia animalista e ingeniería genética
+"""
+
+# ╔═╡ 833b9be3-4e7b-4e9c-925c-9b24eba44a18
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/371565368.sd.mp4?s=0169f88ecfa55d0e38ebbfcc4b30043803ed57dc&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/435803053.sd.mp4?s=25671d0afd271e2fe1d8b7259411c34a75d733e0&profile_id=164&oauth2_token_id=57447761"></div>
+
+"""
+
+# ╔═╡ 39f76355-2ea9-4038-a15d-b8e498441e9e
+md"""
+## Robots con flow
+"""
+
+# ╔═╡ 360df6ad-6e55-4652-9046-ef9b55dd6f53
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/567008718.sd.mp4?s=d02e034479bac6989864704fdbf9ba999c0a4602&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/566971860.sd.mp4?s=521f0aebe677f79c66374856b47861d19c40037d&profile_id=164&oauth2_token_id=57447761"></div>
+
+"""
+
+# ╔═╡ 334ca72b-f0f8-41a8-ae78-81abeddaaaf9
+md"""
+## Energías alternativas
+"""
+
+# ╔═╡ 348120b7-467c-4501-8504-42a1e889c917
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/499416622.sd.mp4?s=5670097689fb90e726393c1905ba4ab42a8a32ed&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/585487011.sd.mp4?s=b8922d606f8f40495702ef3ce41873abcf3140e2&profile_id=164&oauth2_token_id=57447761"></div>
+
+"""
+
+# ╔═╡ fb2b68d8-975b-4b38-8351-60b93db138f7
+md"""
+## Hipertensión arterial
+"""
+
+# ╔═╡ 608a7cf8-01ea-4296-8d35-cb00e820e0a7
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/411678407.sd.mp4?s=4f23072c92b4280123206e791881f923a7652ccf&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/533789634.sd.mp4?s=ad0298eec89643a4afe56a2ad77811d2c34bf021&profile_id=164&oauth2_token_id=57447761"></div>
+
+"""
+
 # ╔═╡ 19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
 md"""
 # Matrices
@@ -170,7 +240,7 @@ md"""
 
 
 
-# ╔═╡ 34b145ef-248a-4746-8082-ac0623440c32
+# ╔═╡ f9a30155-c524-4449-8d7e-9dda99d399db
 md"""
 ##
 """
@@ -319,83 +389,89 @@ begin
 	plot(scatter(eigS,label=false),begin plot(minimum(reigS)-1:0.1:maximum(reigS)+1,x->det(x* diagm(0=>ones(m1))-S),lw=3,label=" Polinomio característico"); scatter!(reigSpoints,label=" Autovalores reales") end)
 end
 
-# ╔═╡ b1251b44-297c-497e-8586-1d2b59996454
-md"""
-# Problema Inverso de Autovalores
-"""
-
-# ╔═╡ 5bfe7a82-965c-4edc-8808-99e29d05605e
-TwoColumn(md"""
-##### Problemas directos y Problemas inversos
-
-> Analizar y derivar la información espectral e inferir el comportamiento dinámico de un sistema a partir de parámetros (físicos) conocidos a priori (como masa, longitud, elasticidad, inductancia, capacitancia, etc.), se denomina **problema directo**.
-
-> El **problema inverso** es validar, determinar o estimar los parámetros del sistema de acuerdo con su comportamiento observado o esperado.
-
-""",md"""
-##### Problema inverso de autovalores (IEP) 
-
-> En el contexto de matrices, un **problema inverso de autovalores (IEP)** se refiere a la reconstrucción de una matriz a partir de datos espectrales prescritos.
-
-> Problemas fundamentales:
-> - *Solubilidad*
-> - *Computabilidad*
-> - *Sensibilidad*
-> - *Aplicabilidad*
-
-""")
-
-# ╔═╡ 61ed6eb1-df65-446d-9674-9a7a50b73138
-md"""
-## Algunas aplicaciones
-> *diseño de control, identificación de sistemas, tomografía sísmica, análisis de componentes principales, exploración y detección remota, procesamiento de conjuntos de antenas, geofísica, espectroscopía molecular, física de partículas, análisis estructural, teoría de circuitos y simulación de sistemas mecánicos.* 
-
-"""
-
-# ╔═╡ fcafa82b-cfeb-4257-92f1-455375b79532
-html"""
-<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/521491380.sd.mp4?s=be703a8900a87be1d1e095c4befe0fc6d14f4eeb&profile_id=165&oauth2_token_id=57447761"></div>
-
-<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/392289251.sd.mp4?s=0b80dc8802ce4e423dc5cfac641b046e2eac208b&profile_id=164&oauth2_token_id=57447761"></div>
-
-<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/372334720.sd.mp4?s=3b94e2d48b5844adcda82889e4809589de5d9172&profile_id=164&oauth2_token_id=57447761"></div>
-
-<div style="position:; top: 0; right: 0;"><img src="
-https://player.vimeo.com/external/530526774.sd.mp4?s=30c764f4df73afe47e971d23951d9f23a1ff3b94&profile_id=164&oauth2_token_id=57447761"></div>
-
-"""
-
 # ╔═╡ 2736d5f3-4285-4bef-beaf-c6d318fa9ab6
 begin
 	slidera=md"``a=``$(@bind a Slider(-0.5:.01:0.5,show_value=true))";
 	sliderb=md"``b=``$(@bind b Slider(-2:.25:2,show_value=true))";
 end;
 
+# ╔═╡ 3c6ce0fa-3050-452f-a3b1-a4d82a0966f1
+md"""
+## Un problema mecánico
+
+Supongamos que tenemos un sistema mecánico simple que consiste en una masa $m$ unida a un resorte con constante $k$ y amortiguamiento $c.$
+
+La dinámica del sistema se puede modelar mediante una ecuación diferencial de segundo orden de la forma:
+
+> $m\ x''+c\ x'+k\ x=f(t)$
+
+donde $x$ es la posición de la masa, $f(t)$ es la fuerza aplicada al sistema y las constantes $m$, $c$ y $k$ son la masa, el amortiguamiento y la constante del resorte, respectivamente.
+
+Para determinar los polos del sistema, se puede escribir la ecuación diferencial en forma de espacio de estados. Definimos los estados del sistema como $x_1 = x$ y $x_2 = x'$, donde $x'$ es la velocidad de la masa. Entonces, podemos escribir la ecuación diferencial como:
+
+> ``\begin{pmatrix}x_1'\\x_2'\end{pmatrix}=\begin{pmatrix}0&1\\-\frac{k}{m}&-\frac{c}{m}\end{pmatrix}\begin{pmatrix}x_1\\x_2\end{pmatrix}+\begin{pmatrix}0\\\frac{1}{m}\end{pmatrix}f(t)``
+
+"""
+
+# ╔═╡ 7e4d8e07-ddbf-454d-b9cd-f7f130477f84
+md"""
+## Un problema biológico
+
+El sistema inmunitario es un sistema dinámico complejo que responde a la presencia de patógenos, como bacterias o virus, para proteger al organismo. El modelo de respuesta inmunitaria se puede describir mediante un sistema de ecuaciones diferenciales que relacionan la cantidad de células inmunitarias, como los linfocitos `T` y `B,` con la cantidad de patógenos presentes en el organismo.
+
+Supongamos que tenemos un modelo simple de respuesta inmunitaria que consta de dos ecuaciones diferenciales de primer orden:
+
+> $\frac{dT}{dt}=k_1P-αT$
+> $\frac{dP}{dt}=-k_2PT$
+
+donde $T$ es la cantidad de linfocitos presentes en el organismo, $P$ es la cantidad de patógenos presentes y $k_1$, $k_2$, y $\alpha$ son constantes que determinan la tasa de producción de linfocitos, la tasa de eliminación de patógenos y la tasa de muerte de los linfocitos, respectivamente.
+
+"""
+
 # ╔═╡ e333fd27-1499-4505-8276-12648fb0357c
 md"""
-## Problema de asignación de polos
+## Asignación de polos
 """
+
+# ╔═╡ 661a8f6d-b204-477b-bda0-3a1cc3db3cac
+md"""
+> Se refiere a la tarea de **diseñar un controlador para un sistema dinámico lineal** que permita asignar los polos del sistema a ubicaciones deseadas en el plano complejo. **Los polos (autovalores) representan la dinámica del sistema**. La ubicación de los polos determina la estabilidad, la respuesta transitoria y la capacidad de seguimiento del sistema."""
 
 # ╔═╡ 12cbbf33-822a-40a4-abb3-248e0031d39c
 TwoColumn(md"""
-- Diseñar un controlador para un sistema dinámico lineal que permita asignar los polos del sistema a ubicaciones deseadas en el plano complejo. 
-- Los polos son las raíces del denominador de la función de transferencia del sistema y representan la dinámica del sistema. 
-- La ubicación de los polos determina la estabilidad, la respuesta transitoria y la capacidad de seguimiento del sistema.
-- Las ubicaciones de los polos están determinadas por los requisitos de rendimiento, como la velocidad de respuesta, la amortiguación y el error estacionario. """,md"""
-- No todas las ubicaciones de polos son alcanzables, por lo que es posible que no sea posible asignar los polos a ubicaciones deseadas. 
-- La asignación de polos puede no ser única, lo que significa que puede haber varios controladores que satisfagan los mismos requisitos de rendimiento.
-- Existen varias técnicas para resolver el problema de asignación de polos, incluyendo el método de colocación de polos, el método de retroalimentación de estados y el método de diseño basado en observador.""")
+##### Problemas
+> - Las ubicaciones de los polos están determinadas por los requisitos de rendimiento, como la velocidad de respuesta, la amortiguación y el error estacionario 
+> - No todas las ubicaciones de polos son alcanzables, es posible que no se pueda asignar los polos a ubicaciones deseadas
+> - La asignación de polos puede no ser única, pueden haber varios controladores que satisfagan los mismos requisitos de rendimiento.
+""",md"""
+##### Técnicas
+> - Método de colocación de polos
+> - Método de retroalimentación de estados
+> - Diseño basado en observador.""")
 
 
 
-# ╔═╡ 72da8f1b-a8ed-4549-84dd-45075b49a559
+# ╔═╡ e6c2fa3f-ba9c-4da8-b82a-6245f23fe3c2
 md"""
-```math
-\dot{x}(t)=A x(t) +B u(t)
-```
-``x (t) ∈\mathbb{R}^n `` es el *estado* y ``u(t) ∈\mathbb{R}^n,`` un **control**.
-
+## El modelo matemático general
 """
+
+# ╔═╡ fb8dd12d-553b-41e0-9299-309a85f7cc5e
+TwoColumn(md""" 
+> ###### El problema de control
+> $ẋ(t) = Ax(t) + Bu(t)$
+> ``x(t)`` es el **vector de estado**, $u(t)$ es el **vector de entrada**
+
+> ###### Retroalimentación de estado
+> $u(t) = -Kx(t) + r(t)$
+> ``K`` es la matriz de **retroalimentación de estado**, que se debe diseñar, $r(t)$ es la **señal de referencia deseada**""",md"""
+Sustituyendo la retroalimentación de estado en la ecuación diferencial de estado, se obtiene:
+
+> ###### Problema de asignación de polos
+> $ẋ(t) = (A - BK)x(t) + Br(t)$
+
+El objetivo es diseñar $K$ de tal manera que los polos del sistema, que son **las raíces del polinomio característico del sistema**, se ubiquen en posiciones deseadas en el plano complejo.
+""")
 
 # ╔═╡ e4427075-3f3a-4771-b3a0-14c20f7accb2
 md"""
@@ -509,17 +585,13 @@ end
 # ╔═╡ 7503724c-113b-4e71-9af5-86ebf408c3b1
 md"""
 ## Algunos tipos de controles
-1. Si ``u(t)=Fx(t)`` (*retroalimentación de estado*), entonces: 
-```math
-\dot{x}(t)=(A +BF )x(t)
-```
-El objetivo en este esquema de control es elegir la matriz de ganancia ``F\in \mathbb{R}^{m×n}`` para lograr *estabilidad* y *acelerar* la respuesta. Para lograr este objetivo, el problema se puede traducir en la elección de ``F`` para **reasignar valores propios** de la matriz ``A + BF``.
+Si ``u(t)=Fx(t)`` (*retroalimentación de estado*), entonces: 
+> $\dot{x}(t)=(A +BF )x(t)$
+> **Objetivo:** Elegir la matri ``F`` para lograr *estabilidad* y *acelerar* la respuesta. El problema se puede traducir en la elección de ``F`` para **reasignar valores propios** de la matriz ``A + BF``.
 
-2. Si el estado ``x(t)`` no es directamente observable, sino solamente una salida ``y(t)``, relacionada con ``x (t)`` via ``y(t)=Cx(t)`` y el control ``u (t)`` ahora debe elegirse como ``u (t) = Ky (t)``, entonces:
-```math
-\dot{x}(t)=(A +BKC )x(t)
-```
-El objetivo ahora es seleccionar la matriz de salida ``K\in \mathbb{R}^{m×p}`` para reasignar los valores propios de ``A + BKC``.
+Si el estado ``x(t)`` no es directamente observable, sino solamente una salida ``y(t)``, relacionada con ``x (t)`` via ``y(t)=Cx(t)`` y el control ``u (t)`` ahora debe elegirse como ``u (t) = Ky (t)``, entonces:
+>``\dot{x}(t)=(A +BKC )x(t)``
+> **Objetivo:** Seleccionar la matriz de salida ``K`` para reasignar los valores propios de ``A + BKC``.
 """
 
 # ╔═╡ 85a9fe4b-d346-43e0-8045-290f9d6b7c8c
@@ -531,7 +603,7 @@ md"""
 md"$A=$",latexify(A),md"$B=$",latexify(B),md"$F=$", latexify(F)
 
 # ╔═╡ 71a887d7-1605-4288-a1bb-067482feea4f
-slidera,sliderb
+sliderb
 
 # ╔═╡ d1b77dff-1605-426f-89fc-32bd4e29c185
 begin
@@ -546,6 +618,57 @@ end
 
 # ╔═╡ cfb24ec2-bd73-4c3a-833e-b1cc386adc41
 slider0=md"``σ=``$(@bind σ Slider(0.2:0.01:1.8,show_value=true))";
+
+# ╔═╡ b1251b44-297c-497e-8586-1d2b59996454
+md"""
+# Problema Inverso de Autovalores
+"""
+
+# ╔═╡ b7a0caf0-468b-4e33-89ec-601fbdd76529
+md"""
+## 
+"""
+
+# ╔═╡ 5bfe7a82-965c-4edc-8808-99e29d05605e
+TwoColumn(md"""
+> ###### Problemas directos
+> Analizar y derivar la información espectral e inferir el comportamiento dinámico de un sistema a partir de parámetros (físicos) conocidos a priori (como masa, longitud, elasticidad, inductancia, capacitancia, etc.)
+
+> ###### Problemas inversos
+> Validar, determinar o estimar los parámetros del sistema de acuerdo con su comportamiento observado o esperado.
+
+""",md"""
+##### Problema inverso de autovalores (IEP) 
+
+> En el contexto de matrices, un **problema inverso de autovalores (IEP)** se refiere a la **reconstrucción de una matriz a partir de datos espectrales** prescritos.
+
+> Problemas fundamentales:
+> - *Solubilidad*
+> - *Computabilidad*
+> - *Sensibilidad*
+> - *Aplicabilidad*
+
+""")
+
+# ╔═╡ 61ed6eb1-df65-446d-9674-9a7a50b73138
+md"""
+## Algunas aplicaciones
+> *diseño de control, identificación de sistemas, tomografía sísmica, análisis de componentes principales, exploración y detección remota, procesamiento de conjuntos de antenas, geofísica, espectroscopía molecular, física de partículas, análisis estructural, teoría de circuitos y simulación de sistemas mecánicos.* 
+
+"""
+
+# ╔═╡ fcafa82b-cfeb-4257-92f1-455375b79532
+html"""
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/521491380.sd.mp4?s=be703a8900a87be1d1e095c4befe0fc6d14f4eeb&profile_id=165&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/392289251.sd.mp4?s=0b80dc8802ce4e423dc5cfac641b046e2eac208b&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="https://player.vimeo.com/external/372334720.sd.mp4?s=3b94e2d48b5844adcda82889e4809589de5d9172&profile_id=164&oauth2_token_id=57447761"></div>
+
+<div style="position:; top: 0; right: 0;"><img src="
+https://player.vimeo.com/external/530526774.sd.mp4?s=30c764f4df73afe47e971d23951d9f23a1ff3b94&profile_id=164&oauth2_token_id=57447761"></div>
+
+"""
 
 # ╔═╡ 0b29d326-59a8-4d6c-b585-3915bd5c000f
 md"""
@@ -581,9 +704,7 @@ md"""
 ##
 
 En general y matricialmente
-```math
-\frac{d^2x}{dt^2}=-DJ_0x,
-```
+> $\frac{d^2x}{dt^2}=-DJ_0x,$
 donde ``x=(x_1 x_2 \dots x_n)'`` y $J_0$ es la matriz de Jacobi 
 
 
@@ -826,11 +947,6 @@ md"""
 
 > **Problema 2.** Dado el conjunto ordenado de $2n-1$ números reales; $$\lambda_{1}^{(n)}<\cdots<\lambda_{1}^{(j)}<\cdots<\lambda_{1}^{(2)}<\lambda_{1}^{(1)}<\lambda_{2}^{(2)}<\cdots<\lambda_{j}^{(j)}<\cdots<\lambda_{n}^{(n)},$$ un vector $\mathbf{x}=(x_1,x_2,\ldots,x_n)^T$ with $x_i\neq0,\,i=1,2,\ldots,n$ y dos números reales positivos $d_{1}$ y $d_{2}$, construir una matriz Jacobi periódica generalizada $\mathcal{J}_n$ de tal forma que $\lambda_{1}^{(j)}$, and $\lambda_{j}^{(j)}$ son el valor propio más pequeño y más grande, respectivamente, de $\mathcal{J}_j,\,j=1,2,\ldots,n$, $\left(\lambda_{n}^{(n)},\mathbf{x}\right)$ es un eigenpar $\mathcal{J}_n$, $b_n=d_1$, y $c_n=d_2$.
 
-"""
-
-# ╔═╡ b986679b-b27f-4658-b750-cbdf31bb7791
-md"""
-# Matrices periódicas de Jacobi a partir de datos espectrales especiales
 """
 
 # ╔═╡ 00000000-0000-0000-0000-000000000001
@@ -2403,8 +2519,19 @@ version = "1.4.1+0"
 # ╟─250bbc56-c12c-4994-a89a-04ed3f1964d2
 # ╟─0672057b-e46b-46e9-a910-6847b94e5732
 # ╟─19aa0519-e543-4899-9ccc-0c0469ace8be
-# ╟─19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
 # ╟─34b145ef-248a-4746-8082-ac0623440c32
+# ╟─3cd870c7-1567-411c-84a9-6abd58d8fe20
+# ╟─a77069c6-f158-431c-9e52-4c3f20572111
+# ╟─53f67ce4-4aac-486c-a4f5-24a5b7b9a654
+# ╟─833b9be3-4e7b-4e9c-925c-9b24eba44a18
+# ╟─39f76355-2ea9-4038-a15d-b8e498441e9e
+# ╟─360df6ad-6e55-4652-9046-ef9b55dd6f53
+# ╟─334ca72b-f0f8-41a8-ae78-81abeddaaaf9
+# ╟─348120b7-467c-4501-8504-42a1e889c917
+# ╟─fb2b68d8-975b-4b38-8351-60b93db138f7
+# ╟─608a7cf8-01ea-4296-8d35-cb00e820e0a7
+# ╟─19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
+# ╟─f9a30155-c524-4449-8d7e-9dda99d399db
 # ╟─3e242dd6-2dd5-4931-b3fa-a897fd3c0878
 # ╟─588a23a5-1d2c-4a32-b3d8-779f89793a5a
 # ╟─13b2fc98-2173-4638-9ada-0aeef70d795d
@@ -2425,17 +2552,17 @@ version = "1.4.1+0"
 # ╟─4d109fcc-1294-4015-b6d1-063164ee492b
 # ╟─9dcd54bd-beda-479b-893c-74fbaeeb20bb
 # ╟─257bada4-8250-4603-97f2-c07c307caf9b
-# ╟─b1251b44-297c-497e-8586-1d2b59996454
-# ╟─5bfe7a82-965c-4edc-8808-99e29d05605e
-# ╟─61ed6eb1-df65-446d-9674-9a7a50b73138
-# ╟─fcafa82b-cfeb-4257-92f1-455375b79532
-# ╠═bee7cfd7-c50b-48fe-ae3b-857fd42a9716
-# ╠═40966a45-c3f0-4769-85aa-65dcadd5c3e6
-# ╠═2736d5f3-4285-4bef-beaf-c6d318fa9ab6
-# ╠═5474d87c-3454-4192-8086-6acfd050f760
+# ╟─bee7cfd7-c50b-48fe-ae3b-857fd42a9716
+# ╟─40966a45-c3f0-4769-85aa-65dcadd5c3e6
+# ╟─2736d5f3-4285-4bef-beaf-c6d318fa9ab6
+# ╟─5474d87c-3454-4192-8086-6acfd050f760
+# ╟─3c6ce0fa-3050-452f-a3b1-a4d82a0966f1
+# ╟─7e4d8e07-ddbf-454d-b9cd-f7f130477f84
 # ╟─e333fd27-1499-4505-8276-12648fb0357c
+# ╟─661a8f6d-b204-477b-bda0-3a1cc3db3cac
 # ╟─12cbbf33-822a-40a4-abb3-248e0031d39c
-# ╟─72da8f1b-a8ed-4549-84dd-45075b49a559
+# ╟─e6c2fa3f-ba9c-4da8-b82a-6245f23fe3c2
+# ╟─fb8dd12d-553b-41e0-9299-309a85f7cc5e
 # ╟─e4427075-3f3a-4771-b3a0-14c20f7accb2
 # ╟─0f0779e8-4c07-455b-a761-fc41693c25c0
 # ╟─3ca3df7f-472b-4485-b470-db206f6bfe36
@@ -2445,6 +2572,11 @@ version = "1.4.1+0"
 # ╟─71a887d7-1605-4288-a1bb-067482feea4f
 # ╟─d1b77dff-1605-426f-89fc-32bd4e29c185
 # ╟─cfb24ec2-bd73-4c3a-833e-b1cc386adc41
+# ╟─b1251b44-297c-497e-8586-1d2b59996454
+# ╟─b7a0caf0-468b-4e33-89ec-601fbdd76529
+# ╟─5bfe7a82-965c-4edc-8808-99e29d05605e
+# ╟─61ed6eb1-df65-446d-9674-9a7a50b73138
+# ╟─fcafa82b-cfeb-4257-92f1-455375b79532
 # ╟─0b29d326-59a8-4d6c-b585-3915bd5c000f
 # ╟─f6d8ab21-ea83-426d-8d8e-6f438d9c0130
 # ╟─601fa98f-81df-4fb8-985b-2635431fd035
@@ -2465,6 +2597,5 @@ version = "1.4.1+0"
 # ╟─b29f9455-d4db-448d-ae9f-21da09ec1a1d
 # ╟─4aed9cab-6b08-46ee-90f0-2efacb7d8756
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
-# ╟─b986679b-b27f-4658-b750-cbdf31bb7791
 # ╟─00000000-0000-0000-0000-000000000001
 # ╟─00000000-0000-0000-0000-000000000002
