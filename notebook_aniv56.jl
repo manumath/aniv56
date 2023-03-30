@@ -410,26 +410,26 @@ donde ``x (t) ∈\mathbb{R}^n `` es el *estado*.
 
 """,let
 
-range1 = -5:0.25:5
+range1 = -1:0.02:1
 md"""	
 **``A =``**  
 	
 ``(``	
- $(@bind aa Scrubbable( range1; default=-4))
+ $(@bind aa Scrubbable( range1; default=-0.04))
  $(@bind bb Scrubbable( range1; default=-1))
  $(@bind cc Scrubbable( range1; default=0))
 ``)``
 
 ``(``
 $(@bind dd Scrubbable(range1; default=1 ))
-$(@bind ee Scrubbable(range1; default=-1.5)) 
+$(@bind ee Scrubbable(range1; default=-0.5)) 
 $(@bind ff Scrubbable(range1; default=0))
 ``)``  
 
 ``(``
 $(@bind gg Scrubbable(range1; default=0 ))
 $(@bind hh Scrubbable(range1; default=0)) 
-$(@bind ii Scrubbable(range1; default=-2))
+$(@bind ii Scrubbable(range1; default=-0.2))
 ``)`` 
 
 
@@ -604,47 +604,18 @@ md"""
 
 # ╔═╡ 9283bbb4-82c3-425d-acdf-d220f5f1a136
 TwoColumn(md"""
-### Matrices de Jacobi periódicas
-Una matriz periódica de Jacobi $n\times n\, (n\geq3)$ es de la forma
+#### Matrices de Jacobi periódicas
 
-$$
-J_n=
-\begin{pmatrix}
-a_{1} & b_{1} &  &   &  b_{n} \\
-b_{1} & a_{2} & b_{2} &  &  \\
- & b_{2} & a_{3} & \ddots &  \\
-%  & \ddots & \ddots & \ddots &  \\
-  &  & \ddots & \ddots & b_{n-1} \\
-b_{n} &  &  & b_{n-1} & a_{n}
-\end{pmatrix}$$
+> `` J_n=\begin{pmatrix} a_{1} & b_{1} &  &   &  b_{n} \\ b_{1} & a_{2} & b_{2} &  &  \\ & b_{2} & a_{3} & \ddots &  \\  & \ddots & \ddots & \ddots &  \\  &  & \ddots & \ddots & b_{n-1} \\ b_{n} &  &  & b_{n-1} & a_{n} \end{pmatrix}``
 
-donde $a_j,b_j\in\mathbb{R}$ y $b_j> 0,\,j=1,2,\ldots,n.$  
+``a_j,b_j\in\mathbb{R}`` y $b_j> 0,\,j=1,2,\ldots,n.$  
 
 
 """,md"""
-### Matrices de Jacobi periódicas generalizadas
+#### Matrices de Jacobi periódicas generalizadas
 
-Y una matriz Jacobi periódica generalizada de $n\times n\, (n\geq3)$ es de la forma
-
-$$\mathcal{J}_n=
-
-\begin{pmatrix}
-
-a_{1} & b_{1} & & & c_{n} \\
-
-c_{1} & a_{2} & b_{2} & & \\
-
-& c_{2} & a_{3} & \ddots & \\
-
-% & \ddots & \ddots & \ddots & \\
-
-& & \ddots & \ddots & b_{n-1} \\
-
-b_{n} & & & c_{n-1} & a_{n}
-
-\end{pmatrix}$$
-
-donde $a_j, b_j, c_j\in\mathbb{R}$ y $b_jc_j>0,\,J=1,2,\ldots,n.$ 
+> ``\mathcal{J}_n=\begin{pmatrix} a_{1} & b_{1} &  &   &  c_{n} \\ c_{1} & a_{2} & b_{2} &  &  \\ & c_{2} & a_{3} & \ddots &  \\  & \ddots & \ddots & \ddots &  \\  &  & \ddots & \ddots & b_{n-1} \\ b_{n} &  &  & c_{n-1} & a_{n} \end{pmatrix}``
+``a_j, b_j, c_j\in\mathbb{R}`` y $b_jc_j>0,\,j=1,2,\ldots,n.$ 
 """)
 
 # ╔═╡ e6348de0-fd5a-48cc-9bce-8b7a334eba52
@@ -657,45 +628,71 @@ md"""
 ## Submatrices Principales 
 """
 
-# ╔═╡ 45523ccb-0571-4c33-961d-f4517961c065
-
-
 # ╔═╡ b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
 TwoColumn(md"""
-Dad una matriz periódica de Jacobi ``n\times n,`` $J_j$ denota la submatriz principal principal de $J_n$, 
 
-$$J_j=
-\begin{pmatrix}
-a_{1} & b_{1} &  &   &   \\
-b_{1} & a_{2} & b_{2} &  &  \\
- & b_{2} & a_{3} & \ddots &  \\
-%  & \ddots & \ddots & \ddots &  \\
-  &  & \ddots & \ddots & b_{j-1} \\
- &  &  & b_{j-1} & a_{j}
-\end{pmatrix},$$ 
+Son las submatrices
 
+$$A_1=\left(\begin{matrix}A_{11}\end{matrix}\right),$$
+
+$$A_2=\left(\begin{matrix}A_{11}&A_{12}\\A_{21}&A_{22}\end{matrix}\right),$$
+
+$$A_3=\left(\begin{matrix}A_{11}&A_{12}&A_{13}\\A_{21}&A_{22}&A_{23}\\A_{31}&A_{32}&A_{33}\end{matrix}\right),$$
+$$\vdots$$
+$$A_j=\left(\begin{matrix}A_{11}&A_{12}&\cdots&A_{1j}\\A_{21}&A_{22}&\cdots&A_{2j}\\\vdots&\vdots&\ddots&\vdots\\A_{j1}&A_{j2}&\cdots&A_{jj}\end{matrix}\right),$$
+para $j=1,\ldots,n.$
+""",
+	md"""
 - ``\sigma(A_j)=\left\{\lambda_{1}^{(j)},\lambda_{2}^{(j)},\ldots,\lambda_{j}^{(j)} \right\}$ es el espectro de $A_j`` 
 - ``P_j(\lambda)`` es el polinomio característico de $A_j$
 - ``\lambda_{1}^{(j)}`` y $\lambda_{j}^{(j)}$ es el valor propio más pequeño y más grande de $A_j$
 
 - ``I_j`` la matriz identidad de $j\times j$
-""",
-	md"""
 Consideramos también, para $j=2,\ldots,n-1,$ la matriz
 
 $$
-\tilde{J}_{j}=\begin{pmatrix}
-    a_{2} & b_{2} &  &   &  \\
-    b_{2} & a_{3} & b_{3} &  &  \\
-      & b_{3} & a_{4} & \ddots &  \\
-      &  & \ddots & \ddots & b_{j-1} \\
-     &  &  & b_{j-1} & a_{j}
-\end{pmatrix},$$
+\tilde{A}_{j}=\left(\begin{matrix}A_{22}&A_{23}&\cdots&A_{2j}\\A_{32}&A_{33}&\cdots&A_{3j}\\\vdots&\vdots&\ddots&\vdots\\A_{j2}&A_{j3}&\cdots&A_{jj}\end{matrix}\right),$$
 
-Que se obtiene eliminando la primera fila y columna de la matriz $J_j,$ cuyo polinomio característico es 
+que se obtiene eliminando la primera fila y columna de la matriz $A_j$ y cuyo polinomio característico es 
 	
-$$Q_{j}(\lambda)=\det(\lambda I_{j-1}-\tilde{J}_{j})$$ 
+$$Q_{j}(\lambda)=\det(\lambda I_{j-1}-\tilde{A}_{j})$$ 
 """)
+
+# ╔═╡ ce2009ae-10e8-4fc4-9d67-a1bfb34178f6
+function slice(a)
+	ei=eigen(S).values
+	mmmin=minimum(ei)-1
+	mmmax=maximum(ei)+1
+	plt=plot()
+	for i in 1:a
+		M=S[1:i,1:i]
+		l=size(M)[1]
+		plot!(mmmin:0.1:mmmax,x->det(x*diagm(0=>ones(l))-M))
+	end
+	return plt
+end
+
+# ╔═╡ d259c9c9-f7e8-44bd-906f-70c10a1f2b8a
+slice(5)
+
+# ╔═╡ d7b5fee0-46c5-4e40-86e9-d77fc430d76d
+md"""
+> ###### Lema
+> Sea $P(\lambda)$ un polinomio monico de grado $n$ con todos sus ceros reales. Si $\lambda_1$ y $\lambda_n$ son, respectivamente, el cero más pequeño y el más grande de $P(\lambda)$, entonces
+> - Si $\mu<\lambda_1$, tenemos ese $(-1)^{n}P(\mu)>0$,
+> - Si $\mu>\lambda_n$, tenemos ese $P(\mu)>0$.
+
+> ###### Entrelazamiento
+> Si los polinomios $f(x)$ y $g(x)$ tienen todos raices reales $r_1 ≤r_2 ≤···≤r_n$ y $s_1 ≤s_2 ≤···≤s_{n−1},$ respectivamente, entonces decimos que $f$ y $g$ se *entrelazan* si y solo si
+> $r_1 ≤s_1 ≤r_2 ≤s_2···≤s_{n−1} ≤r_n.$
+
+> ###### Propiedad de entrelazamiento de Cauchy
+> Si $A$ es una matriz hermitiana, y $B$ es una submatriz principal de $A,$ entonces los valores propios de $B$ entrelazan los valores propios de $A.$
+
+Por esta propiedad, los auto-valores mínimo y máximo, $λ_1^{(j)}$ y $λ_j^{(j)}$ , respectivamente, de cada submatriz principal principal $J_j, j = 1, 2, . . ., n,$ de la matriz $J_n$ satisfacen las relaciones:
+> $λ_1^{(n)} ≤λ_1^{(n-1)}≤\cdots\leq λ_1^{(2)}≤λ_1^{(1)}≤λ_2^{(2)}≤\cdots≤λ_n^{(n)}$ 
+> $λ_1^{(j)}≤a_i≤λ_j^{(j)},\quad i = 1,...,j\quad j = 1,...,n$
+"""
 
 # ╔═╡ a58574cf-fddd-485f-b22d-e38afece289a
 md"""
@@ -2269,18 +2266,18 @@ version = "1.4.1+0"
 # ╟─3feaf757-ff48-44a2-a215-575fe612674d
 # ╟─74595914-a089-4984-961f-a9d19614675d
 # ╟─493fcf66-26af-4fca-b613-2591750e5d30
-# ╠═82387b99-2558-4dc7-b6a2-064a0f74b3f0
-# ╠═f042b24f-b3cc-4f4f-9c5b-f5675250e663
-# ╠═36aa8b1a-eb08-4b51-90a6-90d579b7bfad
-# ╠═12244d34-2085-4b99-a19d-dcda64901d3c
-# ╠═fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
-# ╠═629d548d-619c-4df3-985c-96fe273d907e
-# ╠═6a31fe1a-d92d-4477-a622-bcd2855d0b0b
-# ╠═8006b746-85bb-4c25-ba6e-812b62e35b4a
-# ╠═d9dce1b0-b534-4740-ae36-20be872c8ca0
-# ╠═20d889df-2165-48df-8a74-4a511c9206e2
-# ╠═250bbc56-c12c-4994-a89a-04ed3f1964d2
-# ╠═0672057b-e46b-46e9-a910-6847b94e5732
+# ╟─82387b99-2558-4dc7-b6a2-064a0f74b3f0
+# ╟─f042b24f-b3cc-4f4f-9c5b-f5675250e663
+# ╟─36aa8b1a-eb08-4b51-90a6-90d579b7bfad
+# ╟─12244d34-2085-4b99-a19d-dcda64901d3c
+# ╟─fcd228c9-eb32-4fd9-8fb9-f2df1d79a7dc
+# ╟─629d548d-619c-4df3-985c-96fe273d907e
+# ╟─6a31fe1a-d92d-4477-a622-bcd2855d0b0b
+# ╟─8006b746-85bb-4c25-ba6e-812b62e35b4a
+# ╟─d9dce1b0-b534-4740-ae36-20be872c8ca0
+# ╟─20d889df-2165-48df-8a74-4a511c9206e2
+# ╟─250bbc56-c12c-4994-a89a-04ed3f1964d2
+# ╟─0672057b-e46b-46e9-a910-6847b94e5732
 # ╟─19aa0519-e543-4899-9ccc-0c0469ace8be
 # ╟─19a7a9e7-7c4a-441e-b0e5-ffd19f6cfd8e
 # ╟─34b145ef-248a-4746-8082-ac0623440c32
@@ -2290,7 +2287,7 @@ version = "1.4.1+0"
 # ╟─eed3568d-e647-485f-ab68-9619c408e961
 # ╟─6f4f7f73-abea-4507-bdd6-16c37ad1e818
 # ╟─3ee15f64-66fe-4570-8e14-40cd93f7d384
-# ╠═641d76ce-0bc4-4561-bbd8-20c81cb5bca5
+# ╟─641d76ce-0bc4-4561-bbd8-20c81cb5bca5
 # ╟─a9fdfaa5-d9e3-43f0-8eb1-e0a20f4b0b0f
 # ╟─58ee5733-e606-4a7c-9c70-4279529ff6f8
 # ╟─8506a440-0e9c-4927-9258-8e33f8d43658
@@ -2298,7 +2295,7 @@ version = "1.4.1+0"
 # ╟─1231cb19-33e8-4833-a510-3be047331618
 # ╟─be92e2d6-a6e2-42a9-a306-610177dd3d04
 # ╟─d331554d-36af-4b32-bec5-52325d1e1107
-# ╟─1912670e-7afc-4c52-a5d2-4266ee6ad32f
+# ╠═1912670e-7afc-4c52-a5d2-4266ee6ad32f
 # ╟─0804509e-a23d-411a-ac6a-6ba9c386fdfc
 # ╟─f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
 # ╟─4d109fcc-1294-4015-b6d1-063164ee492b
@@ -2332,8 +2329,10 @@ version = "1.4.1+0"
 # ╟─9283bbb4-82c3-425d-acdf-d220f5f1a136
 # ╟─e6348de0-fd5a-48cc-9bce-8b7a334eba52
 # ╟─f1bef616-9b29-4c89-890a-22d890120fb4
-# ╟─45523ccb-0571-4c33-961d-f4517961c065
 # ╟─b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
+# ╟─ce2009ae-10e8-4fc4-9d67-a1bfb34178f6
+# ╟─d259c9c9-f7e8-44bd-906f-70c10a1f2b8a
+# ╟─d7b5fee0-46c5-4e40-86e9-d77fc430d76d
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
 # ╟─b986679b-b27f-4658-b750-cbdf31bb7791
 # ╟─00000000-0000-0000-0000-000000000001
