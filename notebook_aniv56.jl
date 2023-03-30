@@ -599,6 +599,12 @@ Un problema inverso relacionado consiste en colocar los pesos ``m_i, i = 1, ...,
 
 # ╔═╡ 3bf84ea2-6ff6-47af-9c64-3dcbe786250a
 md"""
+# Problemas inversos de autovalores extremales
+### Para matrices de Jacobi periódicas
+"""
+
+# ╔═╡ e1679284-5cee-46d0-806f-d749cb07c9bf
+md"""
 ##
 """
 
@@ -620,7 +626,7 @@ TwoColumn(md"""
 
 # ╔═╡ e6348de0-fd5a-48cc-9bce-8b7a334eba52
 md"""
-Las entradas en las esquinas inferior izquierda y superior derecha aparecen para que sea periódica. Si $b_n=0,\, J_n$ es una matriz tridiagonal simétrica también llamada matriz de Jacobi.
+###### Las entradas en las esquinas inferior izquierda y superior derecha aparecen para que sea periódica. Si $b_n=0,\, J_n$ es una matriz tridiagonal simétrica también llamada matriz de Jacobi.
 """
 
 # ╔═╡ f1bef616-9b29-4c89-890a-22d890120fb4
@@ -658,6 +664,42 @@ que se obtiene eliminando la primera fila y columna de la matriz $A_j$ y cuyo po
 $$Q_{j}(\lambda)=\det(\lambda I_{j-1}-\tilde{A}_{j})$$ 
 """)
 
+# ╔═╡ 0f9f299b-0e9c-4f87-92d4-a02e99a3a806
+md"""
+## Propiedad de entrelazamiento de Cauchy
+"""
+
+# ╔═╡ 72dbaaf0-3934-4fe4-9f75-eb49e872c18c
+md"""
+> ###### Entrelazamiento
+> Si los polinomios $f(x)$ y $g(x)$ tienen todos raices reales $r_1 ≤r_2 ≤···≤r_n$ y $s_1 ≤s_2 ≤···≤s_{n−1},$ respectivamente, entonces decimos que $f$ y $g$ se *entrelazan* si y solo si
+> - ``\qquad r_1 ≤s_1 ≤r_2 ≤s_2≤\cdots≤s_{n−1} ≤r_n.``
+"""
+
+# ╔═╡ 4540ac70-b24c-4273-92c3-31dec4eceb91
+md"""
+> ###### Propiedad de entrelazamiento de Cauchy
+> Si $A$ es una matriz hermitiana, y $B$ es una submatriz principal de $A,$ entonces los valores propios de $B$ entrelazan los valores propios de $A.$
+
+"""
+
+# ╔═╡ d7b5fee0-46c5-4e40-86e9-d77fc430d76d
+md"""
+> ###### Lema 1
+> Sea $P(\lambda)$ un polinomio monico de grado $n$ con todos sus ceros reales. Si $\lambda_1$ y $\lambda_n$ son, respectivamente, el cero más pequeño y el más grande de $P(\lambda)$, entonces
+> - ``\qquad \mu<\lambda_1``, implica $(-1)^{n}P(\mu)>0$,
+> - ``\qquad \mu>\lambda_n``, implica $P(\mu)>0$
+"""
+
+# ╔═╡ 9fff376b-19a5-4e00-9360-165f6e295b9a
+md"""
+## Entrelazamiento en matrices de Jacobi periódicas
+
+Por esta propiedad, los auto-valores mínimo y máximo, $λ_1^{(j)}$ y $λ_j^{(j)}$ , respectivamente, de cada submatriz principal principal $J_j, j = 1, 2, . . ., n,$ de la matriz $J_n$ satisfacen las relaciones:
+> - ``\qquad λ_1^{(n)} ≤\cdots\leq λ_1^{(2)}≤λ_1^{(1)}≤λ_2^{(2)}≤\cdots≤λ_n^{(n)}``
+> - ``\qquad λ_1^{(j)}≤a_i≤λ_j^{(j)},\quad i = 1,...,j\quad j = 1,...,n``
+"""
+
 # ╔═╡ ce2009ae-10e8-4fc4-9d67-a1bfb34178f6
 function slice(a)
 	ei=eigen(S).values
@@ -673,25 +715,107 @@ function slice(a)
 end
 
 # ╔═╡ d259c9c9-f7e8-44bd-906f-70c10a1f2b8a
-slice(5)
+slice(size(S)[1])
 
-# ╔═╡ d7b5fee0-46c5-4e40-86e9-d77fc430d76d
+# ╔═╡ b29f9455-d4db-448d-ae9f-21da09ec1a1d
 md"""
-> ###### Lema
-> Sea $P(\lambda)$ un polinomio monico de grado $n$ con todos sus ceros reales. Si $\lambda_1$ y $\lambda_n$ son, respectivamente, el cero más pequeño y el más grande de $P(\lambda)$, entonces
-> - Si $\mu<\lambda_1$, tenemos ese $(-1)^{n}P(\mu)>0$,
-> - Si $\mu>\lambda_n$, tenemos ese $P(\mu)>0$.
+## La técnica
 
-> ###### Entrelazamiento
-> Si los polinomios $f(x)$ y $g(x)$ tienen todos raices reales $r_1 ≤r_2 ≤···≤r_n$ y $s_1 ≤s_2 ≤···≤s_{n−1},$ respectivamente, entonces decimos que $f$ y $g$ se *entrelazan* si y solo si
-> $r_1 ≤s_1 ≤r_2 ≤s_2···≤s_{n−1} ≤r_n.$
+> ##### Lema 2
+> Sea $J_n$ una matriz Jacobi periódica de $n\times n$ y $J_{j}$ la submatriz principal principal de $j\times j$ de $J_n$ con el polinomio característico ``P_{j}\left( \lambda \right) =\det\left( \lambda I_{j}-A_{j}\right),\,j=1,2,\ldots ,n`` Entonces la secuencia $\left\{P_{j}\left(\lambda \right)\right\}_{j=1}^{n}$ satisface la relación de recurrencia:
+> - ``P_{1}(\lambda) = \lambda-a_{1},``
+> - ``P_{j}(\lambda) = \left(\lambda-a_j\right) P_{j-1}(\lambda) - b_{j-1}^{2}P_{j-2}(\lambda) ,\quad j=2,3,\ldots,n-1,``
+> - ``P_{n}(\lambda) = \left(\lambda-a_n\right) P_{n-1}(\lambda)- b_{n-1}^{2}P_{n-2}(\lambda) - 2\prod\limits_{i=1}^{n}b_{i}-b_{n}^{2}Q_{n-1}\left(\lambda\right),`` 
+> con $P_{0}(\lambda)=1$.
+"""
 
-> ###### Propiedad de entrelazamiento de Cauchy
-> Si $A$ es una matriz hermitiana, y $B$ es una submatriz principal de $A,$ entonces los valores propios de $B$ entrelazan los valores propios de $A.$
+# ╔═╡ 4aed9cab-6b08-46ee-90f0-2efacb7d8756
+md"""
+## La demostración (un esbozo)
 
-Por esta propiedad, los auto-valores mínimo y máximo, $λ_1^{(j)}$ y $λ_j^{(j)}$ , respectivamente, de cada submatriz principal principal $J_j, j = 1, 2, . . ., n,$ de la matriz $J_n$ satisfacen las relaciones:
-> $λ_1^{(n)} ≤λ_1^{(n-1)}≤\cdots\leq λ_1^{(2)}≤λ_1^{(1)}≤λ_2^{(2)}≤\cdots≤λ_n^{(n)}$ 
-> $λ_1^{(j)}≤a_i≤λ_j^{(j)},\quad i = 1,...,j\quad j = 1,...,n$
+En primer lugar, para $j=2,\ldots,n-1,$ el siguiente sistema de ecuaciones lineales es consistente 
+
+> ``P_{j}\left( \lambda_{1}^{(j)}\right) = \left( \lambda_{1}^{(j)}-a_{j}\right)P_{j-1}\left( \lambda_{1}^{(j)}\right)-b_{j-1}^2P_{j-2}\left( \lambda_{1}^{(j)}\right) = 0``
+> ``P_{j}\left( \lambda_{j}^{(j)}\right) = \left( \lambda_{j}^{(j)}-a_{j}\right)P_{j-1}\left( \lambda_{j}^{(j)}\right)-b_{j-1}^2P_{j-2}\left( \lambda_{j}^{(j)}\right) = 0,``
+
+pues, por el Lema 1, el determinante
+
+> ``P_{j-1}\left( \lambda_{1}^{(j)}\right)P_{j-2}\left( \lambda_{j}^{(j)}\right)- P_{j-1}\left( \lambda_{j}^{(j)}\right)P_{j-2}\left( \lambda_{j}^{(j)}\right)``
+
+es no nulo. Con esto reconstruimos inductivamente hasta la submatriz principal $J_{n-1}.$ De hecho
+
+> ### ``a_1 = \lambda_{1}^{(1)}``
+
+> ### ``a_j =\frac{\lambda_{1}^{(j)}P_{j-1}\left( \lambda_{1}^{(j)}\right)P_{j-2}\left( \lambda_{j}^{(j)}\right)-\lambda_{j}^{(j)}P_{j-1}\left( \lambda_{j}^{(j)}\right)P_{j-2}\left( \lambda_{1}^{(j)}\right)}{h_j}``
+> ### ``b_{j-1}^{2} = \frac{\left(\lambda_{j}^{(j)}-\lambda_{1}^{(j)} \right)P_{j-1}\left( \lambda_{1}^{(j)}\right)P_{j-1}\left( \lambda_{j}^{(j)}\right)}{h_j},\,j=2,\ldots,n-1.``
+
+Además, nuevamente por el Lema 1, tenemos que 
+> ``b_{j-1}^2=\frac{(-1)^{j-1}P_{j-1}\left( \lambda_{1}^{(j)}\right)P_{j-1}\left( \lambda_{j}^{(j)}\right)}{(-1)^{j-1}h_j}>0,\quad j=2,\ldots,n-1,``
+es positivo.
+
+---
+
+Para determinar $a_n, b_{n-1}, b_n$ debemos considerar el sistema
+
+> ``P_{n}\left(\lambda_{1}^{(n)}\right) = \left(\lambda_{1}^{(n)}-a_n\right) P_{n-1}\left(\lambda_{1}^{(n)}\right) - b_{n-1}^{2}P_{n-2}\left(\lambda_{1}^{(n)}\right)``   
+> ``\qquad\qquad\qquad\qquad\qquad\qquad-2\left(\prod\limits_{i=1}^{n-2} b_{i}\right)b_{n-1}b_n-b_n^{2}Q_{n-1}(\lambda_{1}^{(n)}) = 0,``
+> ``P_{n}\left(\lambda_{n}^{(n)}\right) = \left(\lambda_{n}^{(n)}-a_n\right) P_{n-1}\left(\lambda_{n}^{(n)}\right) - b_{n-1}^{2}P_{n-2}\left(\lambda_{n}^{(n)}\right)``
+> ``\qquad\qquad\qquad\qquad\qquad\qquad- 2\left(\prod\limits_{i=1}^{n-2}b_{i}\right) b_{n-1}b_n-b_n^{2}Q_{n-1}(\lambda_{n}^{(n)}) = 0,`` 
+
+que podemos reescribir como
+
+> ``P_{n-2}\left(\lambda_{1}^{(n)}\right)b_{n-1}^{2}+2\left(\prod\limits_{i=1}^{n-2}b_{i}\right)b_{n-1}b_n+Q_{n-1}\left(\lambda_{1}^{(n)}\right)b_n^{2}\\``
+> ``\qquad\qquad\qquad\qquad\qquad\qquad\qquad=\lambda_{1}^{(n)}P_{n-1}\left(\lambda_{1}^{(n)}\right)-a_n P_{n-1}\left(\lambda_{1}^{(n)}\right),\\`` 
+> ``P_{n-2}\left(\lambda_{n}^{(n)}\right)b_{n-1}^{2}+2\left(\prod\limits_{i=1}^{n-2}b_{i}\right)b_{n-1}b_n+Q_{n-1}\left(\lambda_{n}^{(n)}\right)b_n^{2}\\``
+> ``\qquad\qquad\qquad\qquad\qquad\qquad\qquad=\lambda_{n}^{(n)}P_{n-1}\left(\lambda_{n}^{(n)}\right)-a_n P_{n-1}\left(\lambda_{n}^{(n)}\right).\\``
+
+Manipulando apropiadamente el sistema es equivalente al siguiente
+
+> ### $$R_n b_{n-1}^2+2cS_n b_{n-1}b_n+U_nb_n^2+T_n=0$$
+
+donde 
+
+> ``R_{j} = P_{j-1}\left(\lambda_{j}^{(j)}\right)P_{j-2}\left(\lambda_{1}^{(j)}\right) - P_{j-2}\left(\lambda_{j}^{(j)}\right)P_{j-1}\left(\lambda_{1}^{(j)}\right)``
+
+> ``S_{n} =P_{n-1}\left(\lambda_{n}^{(n)}\right)- P_{n-1}\left(\lambda_{1}^{(n)}\right)``
+
+> ``T_{j} = \left(\lambda_{j}^{(j)}-\lambda_{1}^{(j)} \right)P_{j-1}\left(\lambda_{1}^{(j)}\right)P_{j-1}\left( \lambda_{j}^{(j)}\right)``
+
+> ``U_{n} = Q_{n-1}\left(\lambda_{1}^{(n)}\right)P_{n-1}\left(\lambda_{n}^{(n)}\right) - Q_{n-1}\left(\lambda_{n}^{(n)}\right)P_{n-1}\left(\lambda_{1}^{(n)}\right)``
+
+> ``V_{n} =P_{n-2}\left(\lambda_{n}^{(n)}\right)- P_{n-2}\left(\lambda_{1}^{(n)}\right)``
+
+> ``W_{n} = Q_{n-1}\left(\lambda_{1}^{(n)}\right)P_{n-2}\left(\lambda_{n}^{(n)}\right) - Q_{n-1}\left(\lambda_{n}^{(n)}\right)P_{n-2}\left(\lambda_{1}^{(n)}\right)``
+
+> ``Z_{j} = \lambda_{j}^{(j)}P_{j-1}\left(\lambda_{j}^{(j)}\right)P_{j-2}\left(\lambda_{1}^{(j)}\right) - \lambda_{1}^{(j)} P_{j-2}\left(\lambda_{j}^{(j)}\right)P_{j-1}\left(\lambda_{1}^{(j)}\right)``
+
+> ``\beta_j =\prod_{i=1}^{j}b_i,\, \text{for all}\, j=2,\ldots,n-1.``
+
+---
+
+Esto significa que el punto $(X,Y)=(b_{n-1},b_{n})$ debe pertenecer al conjunto
+
+> #### $\mathcal{C}=\{(X,Y)\in\mathbb{R}^2_+: R_n X^2+2cS_n XY+U_nY^2+T_n=0\}.$
+
+El conjunto $\mathcal{C}$ está contenido en una conica que puede o no ser degenerada. Sin embargo, la cónica siempre existe, es decir, no está vacía. De hecho, reescribiendo
+
+> $\mathbf{L}M\mathbf{L}^T=0.$ 
+
+donde 
+
+> $\mathbf{L}=\begin{pmatrix}X & Y & 1\end{pmatrix},\quad  M=\begin{pmatrix} N & 0 \\ 0^T & T_n\end{pmatrix}, \quad\text{y}\quad N=\begin{pmatrix}R_n & cS_n\\ cS_n&U_n\end{pmatrix}.$
+
+Notemos que la conica es degenerada si $\det{M}=0$, y no existe, si $\det{N}>0$ y $(R_n+U_n)\det{M}>0.$ 
+
+Sin embargo, del Lema 1 obtenemos
+
+> $-(R_n+U_n)T_n>0.$  
+
+En consecuencia, de las hipótesis, tenemos $\det N>0$, luego 
+> $(R_n+U_n)\det M=(R_n+U_n)T_n\det N<0,$ 
+lo que implica que la cónica siempre existe. 
+
+En realidad, $\mathcal{C}$ es parte de una elipse con centro en el origen. Por lo tanto, hay números positivos $b_n$ y $b_{n-1}$ que satisfacen la ecuación.
 """
 
 # ╔═╡ a58574cf-fddd-485f-b22d-e38afece289a
@@ -2295,7 +2419,7 @@ version = "1.4.1+0"
 # ╟─1231cb19-33e8-4833-a510-3be047331618
 # ╟─be92e2d6-a6e2-42a9-a306-610177dd3d04
 # ╟─d331554d-36af-4b32-bec5-52325d1e1107
-# ╠═1912670e-7afc-4c52-a5d2-4266ee6ad32f
+# ╟─1912670e-7afc-4c52-a5d2-4266ee6ad32f
 # ╟─0804509e-a23d-411a-ac6a-6ba9c386fdfc
 # ╟─f9a93182-3cc7-4d9c-9a77-1e7e6200e92c
 # ╟─4d109fcc-1294-4015-b6d1-063164ee492b
@@ -2326,13 +2450,20 @@ version = "1.4.1+0"
 # ╟─601fa98f-81df-4fb8-985b-2635431fd035
 # ╟─a79b831d-6443-489b-ace3-2db1584084f8
 # ╟─3bf84ea2-6ff6-47af-9c64-3dcbe786250a
+# ╟─e1679284-5cee-46d0-806f-d749cb07c9bf
 # ╟─9283bbb4-82c3-425d-acdf-d220f5f1a136
 # ╟─e6348de0-fd5a-48cc-9bce-8b7a334eba52
 # ╟─f1bef616-9b29-4c89-890a-22d890120fb4
 # ╟─b6e88a4d-01a8-4f92-a7be-41f05bd84fc4
-# ╟─ce2009ae-10e8-4fc4-9d67-a1bfb34178f6
-# ╟─d259c9c9-f7e8-44bd-906f-70c10a1f2b8a
+# ╟─0f9f299b-0e9c-4f87-92d4-a02e99a3a806
+# ╟─72dbaaf0-3934-4fe4-9f75-eb49e872c18c
+# ╟─4540ac70-b24c-4273-92c3-31dec4eceb91
 # ╟─d7b5fee0-46c5-4e40-86e9-d77fc430d76d
+# ╟─9fff376b-19a5-4e00-9360-165f6e295b9a
+# ╟─d259c9c9-f7e8-44bd-906f-70c10a1f2b8a
+# ╟─ce2009ae-10e8-4fc4-9d67-a1bfb34178f6
+# ╟─b29f9455-d4db-448d-ae9f-21da09ec1a1d
+# ╟─4aed9cab-6b08-46ee-90f0-2efacb7d8756
 # ╟─a58574cf-fddd-485f-b22d-e38afece289a
 # ╟─b986679b-b27f-4658-b750-cbdf31bb7791
 # ╟─00000000-0000-0000-0000-000000000001
